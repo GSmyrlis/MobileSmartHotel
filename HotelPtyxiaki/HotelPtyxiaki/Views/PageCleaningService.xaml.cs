@@ -11,15 +11,13 @@ using System.Collections.ObjectModel;
 namespace HotelPtyxiaki.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PageReception : ContentPage
+    public partial class PageCleaningService : ContentPage
     {
         bool _enabled = false;
         List<DateTime> dates = new List<DateTime>();
         List<TimeSpan> times = new List<TimeSpan>();
-        public PageReception()
-        {
-            InitializeComponent();
-        }
+
+        public PageCleaningService() { InitializeComponent(); }
         public void SpecificDateTimeClicked(object sender, EventArgs args)
         {
             /*datePicker.IsVisible = true;*/

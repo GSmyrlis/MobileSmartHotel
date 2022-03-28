@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="HotelPtyxiaki.Views.PageReception">
+             x:Class="HotelPtyxiaki.Views.PageCleaningService">
     <RelativeLayout Padding="0">
-        <Image x:Name="ImgClean"  Aspect="AspectFill" Source="Assets/closedclean.png" RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}"></Image>
+        <Image x:Name="ImgClean"  Aspect="AspectFill" Source="Assets/closedclean.png" RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Image>
     <StackLayout>
             <Label Text="Do you need Cleaning Service?" FontSize="20"/>
             <!-- VerticalOptions="CenterAndExpand" 
