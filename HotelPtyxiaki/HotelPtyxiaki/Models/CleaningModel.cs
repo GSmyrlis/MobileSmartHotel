@@ -7,7 +7,7 @@ namespace HotelPtyxiaki.Models
     public class CleaningModel
     {
         public bool Activated { get; set; } = true;
-        public bool SelectedHour { get; set; } = false;
-        public int Hour { get; set; }
+        public bool SelectedDateTime { get; set; } = false;
+        public List<string> SpecificDateTimes { get; set; }
     }
 }

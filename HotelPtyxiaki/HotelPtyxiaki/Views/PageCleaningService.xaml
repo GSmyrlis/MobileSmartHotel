@@ -1,19 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="HotelPtyxiaki.Views.PageCleaningService">
-    <ContentPage.Content>
-        <StackLayout>
-            <Image x:Name="ImgClean" Source="/Assets/closedclean.png"></Image>
+             x:Class="HotelPtyxiaki.Views.PageReception">
+    <RelativeLayout Padding="0">
+        <Image x:Name="ImgClean"  Aspect="AspectFill" Source="Assets/closedclean.png" RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}"></Image>
+    <StackLayout>
             <Label Text="Do you need Cleaning Service?" FontSize="20"/>
-           <!-- VerticalOptions="CenterAndExpand" 
+            <!-- VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" /> -->
 
-            <Label x:Name="LblStateQuestion"
-                Text="Not Clean"
-                   FontSize="20"
-                   IsEnabled="False">
-            </Label>
             <Image x:Name="ImgCheckClean" Source="/Assets/deactivate.png" HeightRequest="60" WidthRequest="60">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer
@@ -21,16 +16,24 @@
                 NumberOfTapsRequired="1" />
                 </Image.GestureRecognizers>
             </Image>
-            <StackLayout>
+            <StackLayout WidthRequest="500" HeightRequest="170">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Label x:Name="LblSpecificTime" Margin="30" Text="Specific Time" TextColor="Black" FontSize="20"/>
-                    <CheckBox x:Name="CheckSpecificTime" Color="DarkGray"/>
+                    <CheckBox x:Name="CheckSpecificTime" Margin="30" Color="DarkGray" />
+                    <Button Text="Add"  Margin="60"  HeightRequest="40" WidthRequest="200" Clicked="SpecificDateTimeClicked" />
+                    <DatePicker x:Name ="datePicker" Margin="70" IsVisible="false"  DateSelected="SpecificDateSelected"/>
+                    <TimePicker x:Name="timePicker" Margin="80" IsVisible="false"   Unfocused="SpecificTimeSelected"/>
                 </Grid>
             </StackLayout>
+            <StackLayout>
+                <ScrollView>
+                    <Grid x:Name="GridSpecificDateTimes"></Grid>
+                </ScrollView>
+            </StackLayout>
         </StackLayout>
-    </ContentPage.Content>
+        </RelativeLayout>
 </ContentPage>
