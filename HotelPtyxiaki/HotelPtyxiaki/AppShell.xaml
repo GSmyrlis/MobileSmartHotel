@@ -109,7 +109,7 @@
                 </Grid>
             </DataTemplate>
         </Shell.ItemTemplate>
-        <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
+        <ShellContent Route="PageRestaurant" ContentTemplate="{DataTemplate local:PageRestaurant}" />
     </FlyoutItem>
     <FlyoutItem Title="Room Service" Icon="roomservice.png">
         <Shell.ItemTemplate>

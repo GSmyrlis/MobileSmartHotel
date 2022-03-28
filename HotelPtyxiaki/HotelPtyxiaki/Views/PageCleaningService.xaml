@@ -9,7 +9,7 @@
             <!-- VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" /> -->
 
-            <Image x:Name="ImgCheckClean" Source="/Assets/deactivate.png" HeightRequest="60" WidthRequest="60">
+            <Image x:Name="ImgCheckClean" Source="/Assets/deactivate.png" HeightRequest="60" WidthRequest="60" >
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer
                 Tapped="CheckImageClicked"

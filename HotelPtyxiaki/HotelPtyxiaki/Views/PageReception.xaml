@@ -3,6 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HotelPtyxiaki.Views.PageReception">
     <RelativeLayout Padding="0">
-        <Image x:Name="ImgReceptionBackground" HorizontalOptions="Fill"  VerticalOptions="FillAndExpand" Aspect="AspectFill" Source="Assets/receptionbackground.png" HeightRequest="900" ></Image>
+        <Image x:Name="ImgReceptionBackground" HorizontalOptions="Fill"  VerticalOptions="FillAndExpand" Aspect="AspectFill" Source="Assets/receptionbackground.png" HeightRequest="915" ></Image>
     </RelativeLayout>
 </ContentPage>
