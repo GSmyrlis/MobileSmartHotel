@@ -120,7 +120,7 @@
                 </Grid>
             </DataTemplate>
         </Shell.ItemTemplate>
-        <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
+        <ShellContent Route="PageRoomService" ContentTemplate="{DataTemplate local:PageRoomService}" />
     </FlyoutItem>
     <FlyoutItem Title="Cleaning Service" Icon="cleaning144.png">
         <Shell.ItemTemplate>

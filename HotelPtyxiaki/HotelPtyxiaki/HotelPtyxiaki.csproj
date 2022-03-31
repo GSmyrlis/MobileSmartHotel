@@ -20,6 +20,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\PageRoomService.xaml.cs">
+      <DependentUpon>PageRoomService.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\PageCleaningService.xaml.cs">
       <DependentUpon>PageCleaningService.xaml</DependentUpon>
     </Compile>
@@ -31,6 +34,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\NetworkErrorPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PageRoomService.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\PageCleaningService.xaml">
