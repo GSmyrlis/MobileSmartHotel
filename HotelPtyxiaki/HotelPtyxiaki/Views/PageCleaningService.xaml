@@ -3,34 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HotelPtyxiaki.Views.PageCleaningService">
     <RelativeLayout Padding="0">
-        <Image x:Name="ImgClean"  Aspect="AspectFill" Source="Assets/closedclean.png" RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Image>
-    <StackLayout>
-            <Label Text="Do you need Cleaning Service?" FontSize="20"/>
-            <!-- VerticalOptions="CenterAndExpand" 
+        <Image x:Name="ImgClean"  Aspect="AspectFill" Source="Assets/closedclean.png" RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,-10,0,0"></Image>
+        <StackLayout>
+                <Label Text="Do you need Cleaning Service?" FontSize="20" HorizontalOptions="CenterAndExpand" />
+                <!-- VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" /> -->
-
-            <Image x:Name="ImgCheckClean" Source="/Assets/deactivate.png" HeightRequest="60" WidthRequest="60" >
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer
-                Tapped="CheckImageClicked"
-                NumberOfTapsRequired="1" />
-                </Image.GestureRecognizers>
-            </Image>
-            <StackLayout WidthRequest="500" HeightRequest="170">
+                <Switch x:Name="SwitchEnabled" HeightRequest="70" WidthRequest="70" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" IsVisible="True" >
+                    <Switch.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="CheckImageClicked"
+                            NumberOfTapsRequired="1" />
+                    </Switch.GestureRecognizers>
+                </Switch>
+            <StackLayout WidthRequest="500" HeightRequest="155">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Label x:Name="LblSpecificTime" Margin="30" Text="Specific Time" TextColor="Black" FontSize="20"/>
-                    <CheckBox x:Name="CheckSpecificTime" Margin="30" Color="DarkGray" />
+                    <Switch x:Name="CheckSpecificTime" Margin="0" />
                     <Button Text="Add"  Margin="60"  HeightRequest="40" WidthRequest="200" Clicked="SpecificDateTimeClicked" />
                     <DatePicker x:Name ="datePicker" Margin="70" IsVisible="false"  DateSelected="SpecificDateSelected"/>
                     <TimePicker x:Name="timePicker" Margin="80" IsVisible="false"   Unfocused="SpecificTimeSelected"/>
                 </Grid>
             </StackLayout>
             <StackLayout>
-                <ScrollView>
+                <ScrollView VerticalScrollBarVisibility="Default">
                     <Grid x:Name="GridSpecificDateTimes"></Grid>
                 </ScrollView>
             </StackLayout>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HotelPtyxiaki.Views.HomePage">
+    <RelativeLayout Padding="0">
+        <Image x:Name="ImgBackground" HorizontalOptions="Fill"  VerticalOptions="FillAndExpand" Aspect="AspectFill" Source="Assets/home.png" HeightRequest="750" Margin="-10,-15,0,0" />
+        <StackLayout></StackLayout>
+        </RelativeLayout>
+</ContentPage>

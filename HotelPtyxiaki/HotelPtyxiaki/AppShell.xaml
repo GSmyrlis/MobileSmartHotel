@@ -87,7 +87,7 @@
                 </Grid>
             </DataTemplate>
         </Shell.ItemTemplate>
-        <ShellContent Route="HomePage" ContentTemplate="{DataTemplate local:NewItemPage}"  />
+        <ShellContent Route="HomePage" ContentTemplate="{DataTemplate local:HomePage}"  />
     </FlyoutItem>
     <FlyoutItem Title="Reception" Icon="reception144.png">
         <Shell.ItemTemplate>
@@ -142,7 +142,7 @@
                 </Grid>
             </DataTemplate>
         </Shell.ItemTemplate>
-        <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
+        <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
     </FlyoutItem>
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
 
