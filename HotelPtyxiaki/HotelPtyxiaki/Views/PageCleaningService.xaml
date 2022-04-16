@@ -8,13 +8,8 @@
                 <Label Text="Do you need Cleaning Service?" FontSize="20" HorizontalOptions="CenterAndExpand" />
                 <!-- VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" /> -->
-                <Switch x:Name="SwitchEnabled" HeightRequest="70" WidthRequest="70" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" IsVisible="True" >
-                    <Switch.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Tapped="CheckImageClicked"
-                            NumberOfTapsRequired="1" />
-                    </Switch.GestureRecognizers>
-                </Switch>
+            <Switch x:Name="SwitchEnabled" HeightRequest="70" WidthRequest="70" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" IsVisible="True" Toggled="CheckImageClicked" >
+            </Switch>
             <StackLayout WidthRequest="500" HeightRequest="155">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -22,7 +17,6 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Label x:Name="LblSpecificTime" Margin="30" Text="Specific Time" TextColor="Black" FontSize="20"/>
-                    <Switch x:Name="CheckSpecificTime" Margin="0" />
                     <Button Text="Add"  Margin="60"  HeightRequest="40" WidthRequest="200" Clicked="SpecificDateTimeClicked" />
                     <DatePicker x:Name ="datePicker" Margin="70" IsVisible="false"  DateSelected="SpecificDateSelected"/>
                     <TimePicker x:Name="timePicker" Margin="80" IsVisible="false"   Unfocused="SpecificTimeSelected"/>

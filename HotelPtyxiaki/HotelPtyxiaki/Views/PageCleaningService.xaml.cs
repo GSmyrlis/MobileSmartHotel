@@ -15,8 +15,17 @@ namespace HotelPtyxiaki.Views
     {
         List<DateTime> dates = new List<DateTime>();
         List<TimeSpan> times = new List<TimeSpan>();
-
+        List<DateTime> datetimes = new List<DateTime>();
         public PageCleaningService() { InitializeComponent(); }
+        private List<DateTime> UniteDatesWithTimes()
+        {
+            List<DateTime> datetimes = new List<DateTime>();
+            for (int i = 0; i < dates.Count; i++)
+            {
+                datetimes.Add(new DateTime(day: dates[i].Day, month: dates[i].Month, hour: times[i].Hours, minute: times[i].Minutes, year: DateTime.Now.Year, second: 0));
+            }
+            return datetimes;
+        }
         public void SpecificDateTimeClicked(object sender, EventArgs args)
         {
             datePicker.MinimumDate = DateTime.Today;
@@ -31,32 +40,71 @@ namespace HotelPtyxiaki.Views
         {
             dates.Add(datePicker.Date);
             times.Add(timePicker.Time);
+            datetimes =  UniteDatesWithTimes();
             ObservableCollection<string> itemList = new ObservableCollection<string>();
-            int i = 0;
-            List<Label> labels_specific_datetimes = new List<Label>();
-            foreach (DateTime date in dates)
+            List<SwipeView> swipeViewDateTimes = new List<SwipeView>();
+            for (int i = 0; i < dates.Count; i++)
             {
-                itemList.Add(date.Day.ToString() + "/" + date.Month.ToString() + " " + times[i].Hours.ToString() + ":" + times[i].Minutes.ToString());
-                Label label = new Label();
-                label.Text = itemList[i];
-                label.FontSize = 20;
-                label.TextColor = Color.Black;
-                label.Margin = new Thickness(10,0);
-                label.HorizontalTextAlignment = TextAlignment.Start;
-                label.VerticalTextAlignment = TextAlignment.Start;
-                labels_specific_datetimes.Add(label);
-                i++;
+                
+                SwipeItem deleteSwipeItem = new SwipeItem
+                {
+                    Text = "Delete",
+                    IconImageSource = "delete.png",
+                    BackgroundColor = Color.IndianRed,
+                    BindingContext = datetimes[i]
+                };
+                deleteSwipeItem.Clicked += swipeDeleteItemClicked;
+                //deleteSwipeItem.Invoked += OnDeleteSwipeItemInvoked;
+
+                /* SwipeItem controlitem = new SwipeItem
+                 {
+                     Text = date.Day.ToString() + "/" + date.Month.ToString() + " " + times[i].Hours.ToString() + ":" + times[i].Minutes.ToString(),
+                     IconImageSource = "daytime.png",
+                     BackgroundColor = Color.LightBlue
+                 }*/
+
+                // SwipeView content
+                List<SwipeItem> swipeItems = new List<SwipeItem>() { deleteSwipeItem };
+
+                Grid grid = new Grid
+                {
+                    HeightRequest = 60,
+                    WidthRequest = 200,
+                    BackgroundColor = Color.LightGray
+                };
+                grid.Children.Add(new Label
+                {
+                    Text = "   " + datetimes[i].ToString("dd/MM - HH:mm"),
+                    TextColor = Color.Black,
+                    FontSize = 18,
+                    FontAttributes = FontAttributes.Bold,
+                    HorizontalOptions = LayoutOptions.Start,
+                    VerticalOptions = LayoutOptions.CenterAndExpand,
+                }) ;
+
+                SwipeView swipeView = new SwipeView
+                {
+                    LeftItems = new SwipeItems(swipeItems),
+                    Content = grid
+                };
+                swipeViewDateTimes.Add(swipeView);
             }
             GridSpecificDateTimes.Children.Clear();
             GridSpecificDateTimes.RowSpacing = 10;
-            short x = 0;
-            foreach (Label lab in labels_specific_datetimes)
+            ushort x = 0;
+            foreach (SwipeView swipeView in swipeViewDateTimes)
             {
-                GridSpecificDateTimes.Children.Add(lab);
-                Grid.SetRow(lab, x);
+                GridSpecificDateTimes.Children.Add(swipeView);
+                Grid.SetRow(swipeView, x);
                 x++;
             }
         }
+
+        public void swipeDeleteItemClicked(object sender, EventArgs args)
+        {
+
+        }
+
         public void CheckImageClicked(object sender, EventArgs args)
         {
             try
@@ -64,12 +112,11 @@ namespace HotelPtyxiaki.Views
                 if (SwitchEnabled.IsToggled)
                 {
                     //ImgCheckClean.Source = "/Assets/deactivate.png";
-                    ImgClean.Source = "/Assets/closedclean.png";
+                    ImgClean.Source = "/Assets/openclean.png";
                     return;
                 }
                 //ImgCheckClean.Source = "/Assets/activate.png";
-                ImgClean.Source = "/Assets/openclean.png";
-                SwitchEnabled.IsToggled = true;
+                ImgClean.Source = "/Assets/closedclean.png";
             }
             catch (Exception ex)
             {
