@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelPtyxiaki.Android", "Ho
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelPtyxiaki.iOS", "HotelPtyxiaki\HotelPtyxiaki.iOS\HotelPtyxiaki.iOS.csproj", "{ECC94E74-11E2-4084-87E3-BFB41BC47660}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelPtyxiaki", "HotelPtyxiaki\HotelPtyxiaki\HotelPtyxiaki.csproj", "{EDA18A7E-F18D-49DD-A896-01445FB42226}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelPtyxiaki", "HotelPtyxiaki\HotelPtyxiaki\HotelPtyxiaki.csproj", "{EDA18A7E-F18D-49DD-A896-01445FB42226}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

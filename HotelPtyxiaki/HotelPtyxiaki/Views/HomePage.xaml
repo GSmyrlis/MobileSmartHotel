@@ -2,8 +2,37 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HotelPtyxiaki.Views.HomePage">
-    <RelativeLayout Padding="0">
-        <Image x:Name="ImgBackground" HorizontalOptions="Fill"  VerticalOptions="FillAndExpand" Aspect="AspectFill" Source="Assets/home.png" HeightRequest="750" Margin="-10,-15,0,0" />
-        <StackLayout></StackLayout>
-        </RelativeLayout>
+    <ScrollView HeightRequest="3000">
+        <StackLayout>
+            <Image WidthRequest="600" HeightRequest="200" Source="Assets/applogo.png" Aspect="AspectFill"> </Image>
+            <Image WidthRequest="600" HeightRequest="150" Source="Assets/receptionbackground.png" Aspect="AspectFill">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer
+                Tapped="ReceptionImageClicked"
+                NumberOfTapsRequired="1" />
+                </Image.GestureRecognizers>
+            </Image>
+            <Image WidthRequest="600" HeightRequest="150" Source="Assets/restaurantbackground.png" Aspect="AspectFill">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer
+                Tapped="RestaurantImageClicked"
+                NumberOfTapsRequired="1" />
+                </Image.GestureRecognizers>
+            </Image>
+            <Image WidthRequest="600" HeightRequest="150" Source="Assets/openclean.png" Aspect="AspectFill">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer
+                Tapped="CleaningImageClicked"
+                NumberOfTapsRequired="1" />
+                </Image.GestureRecognizers>
+            </Image>
+            <Image WidthRequest="600" HeightRequest="150" Source="Assets/about.png" Aspect="AspectFill">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer
+                Tapped="AboutImageClicked"
+                NumberOfTapsRequired="1" />
+                </Image.GestureRecognizers>
+            </Image>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

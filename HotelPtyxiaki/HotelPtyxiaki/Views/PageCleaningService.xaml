@@ -8,8 +8,7 @@
                 <Label Text="Do you need Cleaning Service?" FontSize="20" HorizontalOptions="CenterAndExpand" />
                 <!-- VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" /> -->
-            <Switch x:Name="SwitchEnabled" HeightRequest="70" WidthRequest="70" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" IsVisible="True" Toggled="CheckImageClicked" >
-            </Switch>
+            <Switch x:Name="SwitchEnabled" HeightRequest="70" WidthRequest="70" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" IsVisible="True" Toggled="CheckImageClicked" />
             <StackLayout WidthRequest="500" HeightRequest="155">
                 <Grid>
                     <Grid.ColumnDefinitions>

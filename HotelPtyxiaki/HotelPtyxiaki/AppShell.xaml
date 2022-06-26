@@ -111,17 +111,6 @@
         </Shell.ItemTemplate>
         <ShellContent Route="PageRestaurant" ContentTemplate="{DataTemplate local:PageRestaurant}" />
     </FlyoutItem>
-    <FlyoutItem Title="Room Service" Icon="roomservice.png">
-        <Shell.ItemTemplate>
-            <DataTemplate>
-                <Grid>
-                    <Image Source="{Binding Icon}" Margin="5,10,0,0" HeightRequest="45" HorizontalOptions="Start" />
-                    <Label Text="{Binding Title}" Margin="100,10,0,0" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" TextColor="Black" FontSize="20"  />
-                </Grid>
-            </DataTemplate>
-        </Shell.ItemTemplate>
-        <ShellContent Route="PageRoomService" ContentTemplate="{DataTemplate local:PageRoomService}" />
-    </FlyoutItem>
     <FlyoutItem Title="Cleaning Service" Icon="cleaning144.png">
         <Shell.ItemTemplate>
             <DataTemplate>
@@ -132,6 +121,17 @@
             </DataTemplate>
         </Shell.ItemTemplate>
         <ShellContent Route="PageCleaningService" ContentTemplate="{DataTemplate local:PageCleaningService}" />
+    </FlyoutItem>
+    <FlyoutItem Title="About" Icon="about144.png">
+        <Shell.ItemTemplate>
+            <DataTemplate>
+                <Grid>
+                    <Image Source="{Binding Icon}" Margin="5,10,0,0" HeightRequest="45" HorizontalOptions="Start" />
+                    <Label Text="{Binding Title}" Margin="100,10,0,0" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" TextColor="Black" FontSize="20"  />
+                </Grid>
+            </DataTemplate>
+        </Shell.ItemTemplate>
+        <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Logout" Icon="logout144.png">
         <Shell.ItemTemplate>
