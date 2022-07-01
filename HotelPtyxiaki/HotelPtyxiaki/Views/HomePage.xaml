@@ -33,6 +33,13 @@
                 NumberOfTapsRequired="1" />
                 </Image.GestureRecognizers>
             </Image>
+            <Image WidthRequest="600" HeightRequest="150" Source="Assets/rate_us.png" Aspect="AspectFill">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer
+                Tapped="AboutImageClicked"
+                NumberOfTapsRequired="1" />
+                </Image.GestureRecognizers>
+            </Image>
         </StackLayout>
     </ScrollView>
 </ContentPage>
