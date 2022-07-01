@@ -4,5 +4,11 @@
              x:Class="HotelPtyxiaki.Views.PageReception">
     <RelativeLayout Padding="0">
         <Image x:Name="ImgReceptionBackground" HorizontalOptions="Fill"  VerticalOptions="FillAndExpand" Aspect="AspectFill" Source="Assets/receptionbackground.png" HeightRequest="915" Margin="-10,-15,0,0"></Image>
+        <StackLayout>
+            <Label x:Name="LblHotelName" Margin="80,0,0,0" Text="Name is gonna be here" TextColor="White" FontAttributes="Bold" FontSize="Title" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" />
+            <Label x:Name="LblHotelAddress" Margin="80,0,0,0" Text="Address" TextColor="White" FontAttributes="Bold" FontSize="Title" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" />
+            <Label x:Name="LblHotelEmail" Margin="80,0,0,0" Text="Email" TextColor="White" FontAttributes="Bold" FontSize="Title" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" />
+        </StackLayout>
     </RelativeLayout>
+    
 </ContentPage>
