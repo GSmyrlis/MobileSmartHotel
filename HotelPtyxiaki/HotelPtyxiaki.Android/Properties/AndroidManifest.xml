@@ -3,4 +3,8 @@
 	<uses-sdk android:minSdkVersion="27" android:targetSdkVersion="31" />
 	<application android:label=" " android:theme="@style/MainTheme" android:icon="@drawable/reception144"></application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.CALL_PHONE" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.CALL_PRIVILEGED" />
+	<uses-permission android:name="android.permission.MODIFY_PHONE_STATE" />
 </manifest>
