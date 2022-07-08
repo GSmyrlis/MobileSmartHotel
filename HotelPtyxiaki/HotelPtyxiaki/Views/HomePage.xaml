@@ -36,7 +36,7 @@
             <Image WidthRequest="600" HeightRequest="150" Source="Assets/rate_us.png" Aspect="AspectFill">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer
-                Tapped="AboutImageClicked"
+                Tapped="RateImageClicked"
                 NumberOfTapsRequired="1" />
                 </Image.GestureRecognizers>
             </Image>

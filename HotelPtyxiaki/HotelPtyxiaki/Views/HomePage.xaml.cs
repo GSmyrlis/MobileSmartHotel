@@ -38,5 +38,10 @@ namespace HotelPtyxiaki.Views
         {
             await Shell.Current.GoToAsync("//PageCleaningService");
         }
+
+        public async void RateImageClicked(object sender, EventArgs args)
+        {
+            await Shell.Current.GoToAsync("//PageRatings");
+        }
     }
 }

@@ -30,7 +30,8 @@ namespace HotelPtyxiaki.Views
         {
             try
             {
-                PhoneDialer.Open(number);
+                await Launcher.OpenAsync("tel:+0306980386727");
+                //PhoneDialer.Open(number);
             }
             catch (ArgumentNullException ex)
             {

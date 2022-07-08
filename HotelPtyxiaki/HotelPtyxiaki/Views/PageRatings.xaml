@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fRating="clr-namespace:Rating;assembly=Rating"
+             x:Class="HotelPtyxiaki.Views.PageRatings">
+    <ContentPage.Content>
+        <RelativeLayout Padding="0">
+            <Image x:Name="ImgBackground" HorizontalOptions="Fill"  RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}" Aspect="Fill" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}" Source="Assets/background_rate.png" Margin="0,0,0,0"></Image>
+            <StackLayout RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}" Margin="0,50,0,0" VerticalOptions="StartAndExpand">
+                <Label Text="Reception Service" TextColor="White" FontSize="24" Margin="100,0,0,0"/>
+                <fRating:RatingBar SelectedStarValue="0" ImageHeight="30" ImageWidth="30" HorizontalOptions="Center" FlowDirection="LeftToRight" EmptyStarImage="Assets/emptystar.png" FillStarImage="Assets/star_2.png"/>
+                <Label Text="Cleaning Service" TextColor="White" FontSize="24" Margin="110,0,0,0" />
+                <fRating:RatingBar SelectedStarValue="0" ImageHeight="30" ImageWidth="30" HorizontalOptions="Center" FlowDirection="LeftToRight" EmptyStarImage="Assets/emptystar.png" FillStarImage="Assets/star_2.png"/>
+                <Label Text="Restaurant Service" TextColor="White" FontSize="24" Margin="100,0,0,0" />
+                <fRating:RatingBar SelectedStarValue="0" ImageHeight="30" ImageWidth="30" HorizontalOptions="Center" FlowDirection="LeftToRight" EmptyStarImage="Assets/emptystar.png" FillStarImage="Assets/star_2.png"/>
+                <Label Text="Hotel Rating" TextColor="White" FontSize="24" Margin="130,0,0,0" />
+                <fRating:RatingBar SelectedStarValue="0" ImageHeight="30" ImageWidth="30" HorizontalOptions="Center" FlowDirection="LeftToRight" EmptyStarImage="Assets/emptystar.png" FillStarImage="Assets/star_2.png"/>
+            </StackLayout>
+        </RelativeLayout>
+    </ContentPage.Content>
+</ContentPage>

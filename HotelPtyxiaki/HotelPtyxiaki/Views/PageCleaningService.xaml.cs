@@ -28,9 +28,14 @@ namespace HotelPtyxiaki.Views
         }
         public void SpecificDateTimeClicked(object sender, EventArgs args)
         {
-            datePicker.MinimumDate = DateTime.Today;
-            datePicker.Date = DateTime.Today.AddDays(-1);
-            datePicker.Focus();
+            if (SwitchEnabled.IsToggled)
+            {
+                datePicker.MinimumDate = DateTime.Today;
+                datePicker.Date = DateTime.Today.AddDays(-1);
+                datePicker.IsVisible = true;
+                datePicker.Focus();
+                datePicker.IsVisible = false;
+            }
         }
         public void SpecificDateSelected(object sender, EventArgs args)
         {

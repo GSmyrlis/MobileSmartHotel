@@ -142,7 +142,7 @@
                 </Grid>
             </DataTemplate>
         </Shell.ItemTemplate>
-        <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
+        <ShellContent Route="PageRatings" ContentTemplate="{DataTemplate local:PageRatings}" />
     </FlyoutItem>
     <FlyoutItem Title="Logout" Icon="logout144.png">
         <Shell.ItemTemplate>
