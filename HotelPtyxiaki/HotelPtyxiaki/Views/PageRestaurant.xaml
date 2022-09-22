@@ -4,5 +4,11 @@
              x:Class="HotelPtyxiaki.Views.PageRestaurant">
     <RelativeLayout Padding="0">
         <Image x:Name="ImgRestaurantBackground" HorizontalOptions="Fill"  VerticalOptions="FillAndExpand" Aspect="AspectFill" Source="Assets/restaurantbackground.png" HeightRequest="750" Margin="-10,-15,0,0"></Image>
+        <StackLayout Padding="0" Margin="0,20,0,0" VerticalOptions="Center" HorizontalOptions="Start" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+            <Button x:Name="BtnCheckMenu" Margin="0,0,0,0" Text="Menu" VerticalOptions="Start" TextColor="White" FontSize="Body"  Clicked="BtnMenu_Click" />
+            <Label x:Name="LblPool" Text="If you want to hold a place in the pool please select for how many people, the date and the time and press the Submit button" FontSize="18"></Label>
+            <Entry x:Name="EdComment" Margin="10,430,0,0" Placeholder="Enter Comment here" VerticalOptions="FillAndExpand"  MaxLength="30" />
+            <Button x:Name="BtnSubmit" VerticalOptions="End" Text="Submit" ></Button>
+        </StackLayout>
     </RelativeLayout>
 </ContentPage>

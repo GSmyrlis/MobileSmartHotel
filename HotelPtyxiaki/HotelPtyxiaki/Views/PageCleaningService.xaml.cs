@@ -79,6 +79,7 @@ namespace HotelPtyxiaki.Views
                 };
                 grid.Children.Add(new Label
                 {
+                    BindingContext = datetimes[i],
                     Text = "   " + datetimes[i].ToString("dd/MM - HH:mm"),
                     TextColor = Color.Black,
                     FontSize = 18,
@@ -107,7 +108,52 @@ namespace HotelPtyxiaki.Views
 
         public void swipeDeleteItemClicked(object sender, EventArgs args)
         {
-
+            if (typeof(SwipeItem) == sender.GetType())
+            {
+                SwipeItem jackson = (SwipeItem)sender;
+                {
+                    Element something = (Element)jackson.Parent.Parent;
+                    SwipeView jacky = (SwipeView)something;
+                    jacky.IsVisible = false;
+                    //View content = jacky.Content;
+                    //Point blank = new Point(0,0);
+                    //IList<GestureElement> children = content.GetChildElements(blank);
+                    //GestureElement jack = children[0];
+                    //jack.IsVisible = false;
+                    //var a = children.ToList()[0];
+                    //Label testy = (Label)a;
+                    //IEnumerable<Label> selectedLabel;
+                   // int test = 5;
+                }
+                foreach(View view in GridSpecificDateTimes.Children)
+                {
+                    if(view.GetType() == typeof(SwipeView))
+                    {
+                        if (view.IsVisible == false)
+                        {
+                            SwipeView swv = (SwipeView)view;
+                            Grid swvgrid = (Grid)swv.Content;
+                            foreach (View swvview in swvgrid.Children)
+                            {
+                                if (swvview.GetType() == typeof(Label))
+                                {
+                                    foreach (DateTime dt in datetimes)
+                                    {
+                                        if (dt == (DateTime)swvview.BindingContext)
+                                        {
+                                            dates.RemoveAt(datetimes.IndexOf(dt));
+                                            times.RemoveAt(datetimes.IndexOf(dt));
+                                            datetimes.Remove(dt);
+                                            break;
+                                        }
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         public void CheckImageClicked(object sender, EventArgs args)
