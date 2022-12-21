@@ -3,12 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HotelPtyxiaki.Views.PageRestaurant">
     <RelativeLayout Padding="0">
-        <Image x:Name="ImgRestaurantBackground" HorizontalOptions="Fill"  VerticalOptions="FillAndExpand" Aspect="AspectFill" Source="Assets/restaurantbackground.png" HeightRequest="750" Margin="-10,-15,0,0"></Image>
-        <StackLayout Padding="0" Margin="0,20,0,0" VerticalOptions="Center" HorizontalOptions="Start" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+        <Image x:Name="ImgRestaurantBackground" HorizontalOptions="Fill"  VerticalOptions="FillAndExpand" Aspect="AspectFill" Source="Assets/restaurantback.png" HeightRequest="780" Margin="-10,-15,0,0"></Image>
+        <StackLayout Padding="0" Margin="0,20,0,0" VerticalOptions="StartAndExpand" HorizontalOptions="Start" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}">
             <Button x:Name="BtnCheckMenu" Margin="0,0,0,0" Text="Menu" VerticalOptions="Start" TextColor="White" FontSize="Body"  Clicked="BtnMenu_Click" />
-            <Label x:Name="LblPool" Text="If you want to hold a place in the pool please select for how many people, the date and the time and press the Submit button" FontSize="18"></Label>
-            <Entry x:Name="EdComment" Margin="10,430,0,0" Placeholder="Enter Comment here" VerticalOptions="FillAndExpand"  MaxLength="30" />
-            <Button x:Name="BtnSubmit" VerticalOptions="End" Text="Submit" ></Button>
+            <Label x:Name="LblPool" Text="If you want to hold a table on the restaurant please select for how many people, date and time and press the Submit button" VerticalOptions="StartAndExpand" FontAttributes="Bold" TextColor="NavajoWhite" FontSize="20"></Label>
+            <StackLayout Orientation="Horizontal">
+           
+            <Label x:Name="LblPeople" Text="Table for: 1" VerticalOptions="StartAndExpand" FontAttributes="Bold" TextColor="NavajoWhite" FontSize="20"></Label>
+                <Stepper Value="1" 
+         Minimum="1" 
+         Maximum="8" 
+         Increment="1" 
+         HorizontalOptions="Center" 
+         VerticalOptions="CenterAndExpand"
+         ValueChanged="OnValueChanged"/>
+            </StackLayout>
+
+            <DatePicker x:Name ="datePicker" Margin="70" IsVisible="false"  Unfocused="SpecificDateSelected"/>
+            <TimePicker x:Name="timePicker" Margin="80" IsVisible="false"   Unfocused="SpecificTimeSelected"/>
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Date" Clicked="BtnDateClicked"  />
+                <Label x:Name="LblDate"  Text="Date: 1/1" TextColor="NavajoWhite" FontSize="20" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Time" Clicked="BtnTimeClicked"></Button>
+                <Label  x:Name="LblTime" Text="Time: 21:00" TextColor="NavajoWhite" FontSize="20"/>
+            </StackLayout>
+        </StackLayout>
+        <StackLayout Padding="0" Margin="0,0,0,0" VerticalOptions="End" HorizontalOptions="Fill" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+            <Entry x:Name="EdComment" Margin="0,0,0,0" Placeholder="Enter Comment here" VerticalTextAlignment="Top" VerticalOptions="FillAndExpand" BackgroundColor="LightGray" HeightRequest="130"  MaxLength="40" />
+            <Button x:Name="BtnSubmit" Text="Submit" VerticalOptions="End" ></Button>
         </StackLayout>
     </RelativeLayout>
 </ContentPage>

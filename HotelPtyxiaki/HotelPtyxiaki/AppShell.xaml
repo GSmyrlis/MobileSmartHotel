@@ -122,7 +122,7 @@
         </Shell.ItemTemplate>
         <ShellContent Route="PageCleaningService" ContentTemplate="{DataTemplate local:PageCleaningService}" />
     </FlyoutItem>
-    <FlyoutItem Title="About" Icon="about144.png">
+    <FlyoutItem Title="About us" Icon="about144.png">
         <Shell.ItemTemplate>
             <DataTemplate>
                 <Grid>

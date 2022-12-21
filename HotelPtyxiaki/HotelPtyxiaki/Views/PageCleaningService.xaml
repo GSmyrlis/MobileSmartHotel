@@ -11,7 +11,7 @@
             <Switch x:Name="SwitchEnabled" HorizontalOptions="Center" IsVisible="True" Toggled="CheckImageClicked"  />
             <Label x:Name="LblSpecificTime" Text="Specific Time" TextColor="Black" FontSize="24"/>
             <Button Text="Add" Clicked="SpecificDateTimeClicked" />
-            <DatePicker x:Name ="datePicker" Margin="70" IsVisible="false"  DateSelected="SpecificDateSelected"/>
+            <DatePicker x:Name ="datePicker" Margin="70" IsVisible="false"  Unfocused="SpecificDateSelected"/>
             <TimePicker x:Name="timePicker" Margin="80" IsVisible="false"   Unfocused="SpecificTimeSelected"/>
                 <StackLayout>
                     <ScrollView VerticalScrollBarVisibility="Default">

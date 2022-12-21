@@ -30,7 +30,7 @@ namespace HotelPtyxiaki.Views
         {
             if (SwitchEnabled.IsToggled)
             {
-                datePicker.MinimumDate = DateTime.Today;
+                datePicker.MinimumDate = DateTime.Today.AddDays(+1);
                 datePicker.Date = DateTime.Today.AddDays(-1);
                 datePicker.IsVisible = true;
                 datePicker.Focus();
@@ -41,16 +41,14 @@ namespace HotelPtyxiaki.Views
         {
             timePicker.Focus();
         }
-        public void SpecificTimeSelected(object sender, EventArgs args)
+
+        public void SpecificDateTimesShow()
         {
-            dates.Add(datePicker.Date);
-            times.Add(timePicker.Time);
-            datetimes =  UniteDatesWithTimes();
             ObservableCollection<string> itemList = new ObservableCollection<string>();
             List<SwipeView> swipeViewDateTimes = new List<SwipeView>();
             for (int i = 0; i < dates.Count; i++)
             {
-                
+
                 SwipeItem deleteSwipeItem = new SwipeItem
                 {
                     Text = "Delete",
@@ -86,7 +84,7 @@ namespace HotelPtyxiaki.Views
                     FontAttributes = FontAttributes.Bold,
                     HorizontalOptions = LayoutOptions.Start,
                     VerticalOptions = LayoutOptions.CenterAndExpand,
-                }) ;
+                });
 
                 SwipeView swipeView = new SwipeView
                 {
@@ -104,6 +102,14 @@ namespace HotelPtyxiaki.Views
                 Grid.SetRow(swipeView, x);
                 x++;
             }
+        }
+        public void SpecificTimeSelected(object sender, EventArgs args)
+        {
+            dates.Add(datePicker.Date);
+            times.Add(timePicker.Time);
+            datetimes =  UniteDatesWithTimes();
+            SpecificDateTimesShow();
+            datePicker.Date = DateTime.Today;
         }
 
         public void swipeDeleteItemClicked(object sender, EventArgs args)
@@ -154,6 +160,7 @@ namespace HotelPtyxiaki.Views
                     }
                 }
             }
+            SpecificDateTimesShow();
         }
 
         public void CheckImageClicked(object sender, EventArgs args)

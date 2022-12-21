@@ -5,19 +5,24 @@
              x:Class="HotelPtyxiaki.Views.PageRatings">
     <ContentPage.Content>
         <RelativeLayout Padding="0">
-            <Image x:Name="ImgBackground" HorizontalOptions="Fill"  RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}" Aspect="Fill" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}" Source="Assets/background_rate.png" Margin="0,0,0,0"></Image>
-            <StackLayout RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}" Margin="0,50,0,0" VerticalOptions="StartAndExpand">
-                <Label Text="Reception" TextColor="White" FontSize="24" Margin="100,0,0,0"/>
-                <fRating:RatingBar x:Name="ReceptionRateBar" SelectedStarValue="0" ImageHeight="30" ImageWidth="30" HorizontalOptions="Center" FlowDirection="LeftToRight" EmptyStarImage="Assets/emptystar.png" FillStarImage="Assets/star_2.png"/>
-                <Label Text="Cleaning" TextColor="White" FontSize="24" Margin="110,0,0,0" />
-                <fRating:RatingBar x:Name="CleaningRateBar" SelectedStarValue="0" ImageHeight="30" ImageWidth="30" HorizontalOptions="Center" FlowDirection="LeftToRight" EmptyStarImage="Assets/emptystar.png" FillStarImage="Assets/star_2.png"/>
-                <Label Text="Restaurant" TextColor="White" FontSize="24" Margin="100,0,0,0" />
-                <fRating:RatingBar x:Name="RestaurantRateBar" SelectedStarValue="0" ImageHeight="30" ImageWidth="30" HorizontalOptions="Center" FlowDirection="LeftToRight" EmptyStarImage="Assets/emptystar.png" FillStarImage="Assets/star_2.png"/>
-                <Label Text="Pool" TextColor="White" FontSize="24" Margin="100,0,0,0" />
-                <fRating:RatingBar x:Name="PoolRateBar" SelectedStarValue="0" ImageHeight="30" ImageWidth="30" HorizontalOptions="Center" FlowDirection="LeftToRight" EmptyStarImage="Assets/emptystar.png" FillStarImage="Assets/star_2.png"/>
-                <Label Text="General Hotel Rating" TextColor="White" FontSize="24" Margin="130,0,0,0" />
-                <fRating:RatingBar x:Name="GeneralHotelRateBar" SelectedStarValue="0" ImageHeight="30" ImageWidth="30" HorizontalOptions="Center" FlowDirection="LeftToRight" EmptyStarImage="Assets/emptystar.png" FillStarImage="Assets/star_2.png"/>
+            <Image x:Name="ImgBackground" HorizontalOptions="Start"  VerticalOptions="FillAndExpand" RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}"  RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}" Aspect="AspectFill" Source="Assets/about.png" Margin="0,0,0,0"></Image>
+            <StackLayout RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}" Margin="0,30,0,0" VerticalOptions="StartAndExpand">
+                <Label Text="Please rate our Services"  HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold" FontSize="25" Margin="0,20,0,0"/>
+                <Label Text="Reception" TextColor="Black" HorizontalOptions="Center" FontSize="24" Margin="0,50,0,0"/>
+                <fRating:RatingBar x:Name="ReceptionRateBar" SelectedStarValue="0" ImageHeight="30" ImageWidth="30" HorizontalOptions="Center" FlowDirection="LeftToRight" EmptyStarImage="Assets/ratingstarblack.png" FillStarImage="Assets/star_2.png" />
+                <Label Text="Cleaning" TextColor="Black"  HorizontalOptions="Center" FontSize="24" Margin="0,0,0,0" />
+                <fRating:RatingBar x:Name="CleaningRateBar" SelectedStarValue="0" ImageHeight="30" ImageWidth="30" HorizontalOptions="Center" FlowDirection="LeftToRight" EmptyStarImage="Assets/ratingstarblack.png" FillStarImage="Assets/star_2.png"/>
+                <Label Text="Restaurant" TextColor="Black"  HorizontalOptions="Center" FontSize="24" Margin="0,0,0,0" />
+                <fRating:RatingBar x:Name="RestaurantRateBar" SelectedStarValue="0" ImageHeight="30" ImageWidth="30" HorizontalOptions="Center" FlowDirection="LeftToRight" EmptyStarImage="Assets/ratingstarblack.png" FillStarImage="Assets/star_2.png"/>
+                <Label Text="Pool" TextColor="Black"  HorizontalOptions="Center" FontSize="24" Margin="0,0,0,0" />
+                <fRating:RatingBar x:Name="PoolRateBar" SelectedStarValue="0" ImageHeight="30" ImageWidth="30" HorizontalOptions="Center" FlowDirection="LeftToRight" EmptyStarImage="Assets/ratingstarblack.png" FillStarImage="Assets/star_2.png"/>
+                <Label Text="General Hotel Rating" TextColor="Black"  HorizontalOptions="Center" FontSize="24" Margin="0,0,0,0" />
+                <fRating:RatingBar x:Name="GeneralHotelRateBar" SelectedStarValue="0" ImageHeight="30" ImageWidth="30" HorizontalOptions="Center" FlowDirection="LeftToRight" EmptyStarImage="Assets/ratingstarblack.png" FillStarImage="Assets/star_2.png"/>
+            </StackLayout>
+            <StackLayout Padding="0" Margin="0,0,0,0" VerticalOptions="End" HorizontalOptions="Fill" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+                <Button x:Name="BtnSubmit" Text="Submit" VerticalOptions="End" ></Button>
             </StackLayout>
         </RelativeLayout>
+     
     </ContentPage.Content>
 </ContentPage>
