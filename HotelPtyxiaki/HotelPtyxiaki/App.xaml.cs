@@ -4,26 +4,45 @@ using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
+using System.Threading.Tasks;
 
 namespace HotelPtyxiaki
 {
     public partial class App : Application
     {
-        private void CheckConnection()
+        private bool CheckConnection()
         {
             var current = Connectivity.NetworkAccess;
-            if (!(current == NetworkAccess.Internet)){ MainPage = new NetworkErrorPage(); }
-            //await Navigation.PushAsync(new YourPageWhenThereIsNoConnection());
+            if (current == NetworkAccess.Internet) { return true; }
             else
-                MainPage = new AppShell();
+                return false;
         }
-
+        public async Task APITest()
+        {
+            Models.Hotel testhotel = new Models.Hotel();
+            testhotel.HotelWebsite = "JerrikoHotel.com";
+            testhotel.HotelName = "Jerriko Hotel";
+            testhotel.HotelInfo = "This is my test for the fucking API, and this is the info of the fucking Jerriko. If you arrived up here it means that Android app can post!!! Bravo";
+            testhotel.ReceptionTelephone = 251235125;
+            testhotel.HotelAddress = "Vasilissis Sofias 68";
+            testhotel.HotelEmail = "info@JerrikoHotel.com.mk";
+            testhotel.CleaningServiceActivate = false;
+            testhotel.RestaurantMenuLink = "JerrikoHotel.SexiestHotel.com.mk";
+            testhotel.CleaningServiceReservDateTime = "[\"2023-07-25T12:00:00\", \"2023-07-26T14:30:00\"]'".ToString();
+            testhotel.RestaurantReservDateTime = "[\"2023-08-24T09:00:00\"]";
+            testhotel.RestaurantReservPeopleNumber = 2;
+            Services.HotelAPIService _api = new Services.HotelAPIService();
+            await _api.UpdateHotelDataAsync(testhotel);
+            Models.CleaningService cleanex = await _api.GetCleaningServiceDataAsync();
+            Console.WriteLine("CLEANEEEEX!!!: " + cleanex.ToString());
+        }//only for tests when debugging
         public App()
         {
             InitializeComponent();
-            CheckConnection();
-            DependencyService.Register<MockDataStore>();
-            //MainPage = new AppShell();
+            Task.Run(async() => await APITest());
+            if (CheckConnection()) { MainPage = new AppShell(); }
+            else
+            { MainPage = new NetworkErrorPage(); }
         }
 
         protected override void OnStart()

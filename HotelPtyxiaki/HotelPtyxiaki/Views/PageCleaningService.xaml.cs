@@ -16,7 +16,17 @@ namespace HotelPtyxiaki.Views
         List<DateTime> dates = new List<DateTime>();
         List<TimeSpan> times = new List<TimeSpan>();
         List<DateTime> datetimes = new List<DateTime>();
-        public PageCleaningService() { InitializeComponent(); }
+        public PageCleaningService() { InitializeComponent(); 
+            this.Appearing += RefreshPage; }
+
+        public async void RefreshPage(object sender, EventArgs e)
+        {
+            Services.HotelAPIService _api = new Services.HotelAPIService();
+            Models.CleaningService ourcleaning = await _api.GetCleaningServiceDataAsync();
+            SwitchEnabled.IsToggled = ourcleaning.CleaningServiceActivate;
+            return;
+        }
+
         private List<DateTime> UniteDatesWithTimes()
         {
             List<DateTime> datetimes = new List<DateTime>();
@@ -37,6 +47,7 @@ namespace HotelPtyxiaki.Views
                 datePicker.IsVisible = false;
             }
         }
+        
         public void SpecificDateSelected(object sender, EventArgs args)
         {
             timePicker.Focus();
@@ -57,16 +68,6 @@ namespace HotelPtyxiaki.Views
                     BindingContext = datetimes[i]
                 };
                 deleteSwipeItem.Clicked += swipeDeleteItemClicked;
-                //deleteSwipeItem.Invoked += OnDeleteSwipeItemInvoked;
-
-                /* SwipeItem controlitem = new SwipeItem
-                 {
-                     Text = date.Day.ToString() + "/" + date.Month.ToString() + " " + times[i].Hours.ToString() + ":" + times[i].Minutes.ToString(),
-                     IconImageSource = "daytime.png",
-                     BackgroundColor = Color.LightBlue
-                 }*/
-
-                // SwipeView content
                 List<SwipeItem> swipeItems = new List<SwipeItem>() { deleteSwipeItem };
 
                 Grid grid = new Grid
@@ -121,15 +122,6 @@ namespace HotelPtyxiaki.Views
                     Element something = (Element)jackson.Parent.Parent;
                     SwipeView jacky = (SwipeView)something;
                     jacky.IsVisible = false;
-                    //View content = jacky.Content;
-                    //Point blank = new Point(0,0);
-                    //IList<GestureElement> children = content.GetChildElements(blank);
-                    //GestureElement jack = children[0];
-                    //jack.IsVisible = false;
-                    //var a = children.ToList()[0];
-                    //Label testy = (Label)a;
-                    //IEnumerable<Label> selectedLabel;
-                   // int test = 5;
                 }
                 foreach(View view in GridSpecificDateTimes.Children)
                 {
