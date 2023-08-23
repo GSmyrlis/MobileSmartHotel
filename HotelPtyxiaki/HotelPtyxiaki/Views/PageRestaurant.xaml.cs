@@ -12,10 +12,46 @@ namespace HotelPtyxiaki.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PageRestaurant : ContentPage
     {
+        DateTime dayT = new DateTime();
         public PageRestaurant()
         {
             InitializeComponent();
+            this.Appearing += RefreshPage;
         }
+        public async void RefreshPage(object sender, EventArgs e)
+        {
+            Services.HotelAPIService _api = new Services.HotelAPIService();
+            Models.RestaurantReservation ourRest = await _api.GetRestaurantReservationAsync();
+            GetValuesToPage(ourRest);
+            return;
+        }
+
+        public void GetValuesToPage(Models.RestaurantReservation restran)
+        {
+            EdComment.Text = restran.RestaurantReservComment;
+            if (restran.RestaurantReservPeopleNumber > 0)
+            {
+                StprPeople.Value = restran.RestaurantReservPeopleNumber;
+            }
+            else
+            {
+                StprPeople.Value = 0;
+            }
+            try
+            {
+                if (HotelPtyxiaki.PublicMethods.ConvertStringToListOfDateTime(restran.RestaurantReservDateTime)[0] != null)
+                {
+                    datePicker.Date = HotelPtyxiaki.PublicMethods.ConvertStringToListOfDateTime(restran.RestaurantReservDateTime)[0];
+                    SpecificDateSelected(null, null);
+                    timePicker.Time = HotelPtyxiaki.PublicMethods.ConvertStringToListOfDateTime(restran.RestaurantReservDateTime)[0].TimeOfDay;
+                    SpecificTimeSelected(null, null);
+                }
+            }
+            catch(Exception dtex) {
+                Console.WriteLine(dtex.Message);
+            }
+        }
+
         public async void BtnMenu_Click(object sender, EventArgs e)
         {
             await Browser.OpenAsync(new Uri("https://img.freepik.com/free-vector/creative-restaurant-menu-digital-use-with-photo_52683-45622.jpg?w=2000"));
@@ -40,6 +76,9 @@ namespace HotelPtyxiaki.Views
                 timePicker.IsVisible = false;
         }
         void SpecificDateSelected(object sender, EventArgs e) { LblDate.Text = "Date: " + datePicker.Date.ToString("dd/MM"); }
-        void SpecificTimeSelected(object sender, EventArgs e) { LblTime.Text = "Time: " + timePicker.Time.Hours + ":" + timePicker.Time.Minutes; }
+        void SpecificTimeSelected(object sender, EventArgs e) 
+        {
+                LblTime.Text = "Time: " + timePicker.Time.Hours.ToString("00") + ":" + timePicker.Time.Minutes.ToString("00");
+        }
     }
 }

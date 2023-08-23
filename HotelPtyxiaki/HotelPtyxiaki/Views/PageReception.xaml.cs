@@ -13,24 +13,40 @@ namespace HotelPtyxiaki.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PageReception : ContentPage
     {
+        string ReceptionTelephone = "00306980386727";
         public PageReception()
         {
             InitializeComponent();
-            //Map hotelmap = new Map();
-            //hotelmap.Pins.Clear();
-            //MyLayout.Children.Add(hotelmap, () => new Rectangle(150, 150, 150, 150));
+            this.Appearing += RefreshPage;
+        }
+
+        public async void RefreshPage(object sender, EventArgs e)
+        {
+            Services.HotelAPIService _api = new Services.HotelAPIService();
+            Models.Hotel ourHotel = await _api.GetHotelDataAsync();
+            GetValuesToPage(ourHotel);
+            return;
+        }
+
+        public void GetValuesToPage(Models.Hotel hot)
+        {
+            LblHotelName.Text = hot.HotelName;
+            LblHotelEmail.Text = hot.HotelEmail;
+            LblHotelAddress.Text = hot.HotelAddress;
+            LblWelcome.Text = hot.HotelInfo;
+            ReceptionTelephone = hot.ReceptionTelephone.ToString();
         }
 
         public async void BtnCallReceptionClicked(object sender, EventArgs args)
         {
-            PlacePhoneCall("6980386727");
+            PlacePhoneCall(ReceptionTelephone);
         }
 
         public async void PlacePhoneCall(string number)
         {
             try
             {
-                await Launcher.OpenAsync("tel:+0306980386727");
+                await Launcher.OpenAsync(number);
                 //PhoneDialer.Open(number);
             }
             catch (ArgumentNullException ex)

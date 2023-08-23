@@ -97,5 +97,44 @@ namespace HotelPtyxiaki.Services
                     throw;
                 }
         }
+
+        public async Task<Models.Rating> GetRatingAsync()
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.GetAsync(BaseUrl + "/rating");
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseData = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<Models.Rating>(responseData);
+                }
+                else
+                {
+                    throw new Exception("Failed to get restaurant reservation data: " + response.StatusCode);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception or log the error
+                throw;
+            }
+        }
+
+        public async Task<bool> PostRatingAsync(Models.Rating rates)
+        {
+            try
+            {
+                string jsonData = JsonConvert.SerializeObject(rates);
+                HttpContent content = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _httpClient.PostAsync(BaseUrl + "/rating", content);
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                // Handle exception or log the error
+                throw;
+            }
+        }
     }
 }

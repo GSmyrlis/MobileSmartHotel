@@ -10,11 +10,13 @@
             <StackLayout Orientation="Horizontal">
            
             <Label x:Name="LblPeople" Text="Table for: 1" VerticalOptions="StartAndExpand" FontAttributes="Bold" TextColor="NavajoWhite" FontSize="20"></Label>
-                <Stepper Value="1" 
+                <Stepper
+                    Value="1" 
          Minimum="1" 
          Maximum="8" 
          Increment="1" 
          HorizontalOptions="Center" 
+                    x:Name="StprPeople"
          VerticalOptions="CenterAndExpand"
          ValueChanged="OnValueChanged"/>
             </StackLayout>
@@ -27,7 +29,7 @@
             </StackLayout>
             <StackLayout Orientation="Horizontal">
                 <Button Text="Time" Clicked="BtnTimeClicked"></Button>
-                <Label  x:Name="LblTime" Text="Time: 21:00" TextColor="NavajoWhite" FontSize="20"/>
+                <Label  x:Name="LblTime" Text="Time: 00:00" TextColor="NavajoWhite" FontSize="20"/>
             </StackLayout>
         </StackLayout>
         <StackLayout Padding="0" Margin="0,0,0,0" VerticalOptions="End" HorizontalOptions="Fill" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}">

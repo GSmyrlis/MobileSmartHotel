@@ -7,7 +7,7 @@ namespace HotelPtyxiaki.Models
     public class RestaurantReservation
     {
         public int RestaurantReservPeopleNumber { get; set; } = 0;
-        public string ResturantReservDateTime { get; set; } = string.Empty;
+        public string RestaurantReservComment { get; set; } = string.Empty;
         public string RestaurantReservDateTime { get; set; } = string.Empty;
     }
 }
