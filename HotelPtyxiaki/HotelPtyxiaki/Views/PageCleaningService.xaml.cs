@@ -23,8 +23,16 @@ namespace HotelPtyxiaki.Views
         {
             Services.HotelAPIService _api = new Services.HotelAPIService();
             Models.CleaningService ourcleaning = await _api.GetCleaningServiceDataAsync();
-            SwitchEnabled.IsToggled = ourcleaning.CleaningServiceActivate;
+            GetValuesToPage(ourcleaning);
             return;
+        }
+
+        public void GetValuesToPage(Models.CleaningService ourcleaning)
+        {
+            SwitchEnabled.IsToggled = ourcleaning.CleaningServiceActivate;
+            dates = HotelPtyxiaki.PublicMethods.ConvertStringToListOfDateTime(ourcleaning.CleaningServiceReservDateTime);
+            datetimes = dates;
+            SpecificDateTimesShow();
         }
 
         private List<DateTime> UniteDatesWithTimes()
@@ -139,9 +147,30 @@ namespace HotelPtyxiaki.Views
                                     {
                                         if (dt == (DateTime)swvview.BindingContext)
                                         {
-                                            dates.RemoveAt(datetimes.IndexOf(dt));
-                                            times.RemoveAt(datetimes.IndexOf(dt));
-                                            datetimes.Remove(dt);
+                                            try
+                                            {
+                                                dates.RemoveAt(datetimes.IndexOf(dt));
+                                            }
+                                            catch(Exception dateex)
+                                            {
+                                                Console.WriteLine(dateex.Message);
+                                            }
+                                            try
+                                            {
+                                                times.RemoveAt(datetimes.IndexOf(dt));
+                                            }
+                                            catch (Exception datetimesex)
+                                            {
+                                                Console.WriteLine(datetimesex.Message);
+                                            }
+                                            try
+                                            {
+                                                datetimes.Remove(dt);
+                                            }
+                                            catch (Exception dtex)
+                                            {
+                                                Console.WriteLine(dtex.Message);
+                                            }
                                             break;
                                         }
                                     }

@@ -26,10 +26,10 @@ namespace HotelPtyxiaki
             testhotel.ReceptionTelephone = 251235125;
             testhotel.HotelAddress = "Vasilissis Sofias 68";
             testhotel.HotelEmail = "info@JerrikoHotel.com.mk";
-            testhotel.CleaningServiceActivate = false;
+            testhotel.CleaningServiceActivate = true;
             testhotel.RestaurantMenuLink = "JerrikoHotel.SexiestHotel.com.mk";
-            testhotel.CleaningServiceReservDateTime = "[\"2023-07-25T12:00:00\", \"2023-07-26T14:30:00\"]'".ToString();
-            testhotel.RestaurantReservDateTime = "[\"2023-08-24T09:00:00\"]";
+            testhotel.CleaningServiceReservDateTime = "2023-08-23 10:35:00, 2023-08-24 12:30:00, 2023-08-25 14:45:00";
+            testhotel.RestaurantReservDateTime = "2023 - 08 - 23 21:00:00";
             testhotel.RestaurantReservPeopleNumber = 2;
             Services.HotelAPIService _api = new Services.HotelAPIService();
             await _api.UpdateHotelDataAsync(testhotel);
