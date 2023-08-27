@@ -27,7 +27,7 @@ namespace HotelPtyxiaki
             return dateTimeList;
         }
 
-        static string ConvertDateTimeListToString(List<DateTime> dateTimeList)
+        public static string ConvertDateTimeListToString(List<DateTime> dateTimeList)
         {
             List<string> formattedDates = new List<string>();
 

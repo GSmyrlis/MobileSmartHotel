@@ -18,7 +18,7 @@
                         <Grid x:Name="GridSpecificDateTimes"></Grid>
                     </ScrollView>
                 </StackLayout>
-            <Button Text="Submit"></Button>
+            <Button x:Name="BtnSubmit" Clicked="BtnSubmitClicked" Text="Submit"></Button>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>

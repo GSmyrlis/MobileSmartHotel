@@ -12,7 +12,6 @@ namespace HotelPtyxiaki.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PageRestaurant : ContentPage
     {
-        DateTime dayT = new DateTime();
         public PageRestaurant()
         {
             InitializeComponent();
@@ -54,7 +53,7 @@ namespace HotelPtyxiaki.Views
 
         public async void BtnMenu_Click(object sender, EventArgs e)
         {
-            await Browser.OpenAsync(new Uri("https://img.freepik.com/free-vector/creative-restaurant-menu-digital-use-with-photo_52683-45622.jpg?w=2000"));
+            await Browser.OpenAsync(new Uri(App.RestaurantMenu));
         }
         void OnValueChanged(object sender, ValueChangedEventArgs e)
         {
@@ -79,6 +78,25 @@ namespace HotelPtyxiaki.Views
         void SpecificTimeSelected(object sender, EventArgs e) 
         {
                 LblTime.Text = "Time: " + timePicker.Time.Hours.ToString("00") + ":" + timePicker.Time.Minutes.ToString("00");
+        }
+        public async void BtnSubmitClicked(object sender, EventArgs e)
+        {
+            Services.HotelAPIService _api = new Services.HotelAPIService();
+            bool submittedsuccess = await _api.PostRestaurantReservationAsync(GetCurrentRestaurantReservationData());
+            if (!submittedsuccess)
+            {
+                await DisplayAlert("Failure", "Failed to post request", "OK");
+                return;
+            }
+            await DisplayAlert("Posted", "Successfully posted your Reservation", "OK");
+        }
+        public Models.RestaurantReservation GetCurrentRestaurantReservationData()
+        {
+            Models.RestaurantReservation _restreserve = new Models.RestaurantReservation();
+            _restreserve.RestaurantReservPeopleNumber = Convert.ToInt32(StprPeople.Value);
+            _restreserve.RestaurantReservComment = EdComment.Text;
+            _restreserve.RestaurantReservDateTime = (new DateTime(hour: timePicker.Time.Hours, minute: timePicker.Time.Minutes, month: datePicker.Date.Month, day: datePicker.Date.Day, year: datePicker.Date.Year, second: 0)).ToString("dd/MM/yyyy hh:mm:ss");
+            return _restreserve;
         }
     }
 }

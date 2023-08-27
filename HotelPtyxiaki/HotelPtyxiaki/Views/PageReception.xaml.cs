@@ -13,7 +13,7 @@ namespace HotelPtyxiaki.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PageReception : ContentPage
     {
-        string ReceptionTelephone = "00306980386727";
+        private string ReceptionTelephone = "00306980386727";
         public PageReception()
         {
             InitializeComponent();
@@ -25,6 +25,7 @@ namespace HotelPtyxiaki.Views
             Services.HotelAPIService _api = new Services.HotelAPIService();
             Models.Hotel ourHotel = await _api.GetHotelDataAsync();
             GetValuesToPage(ourHotel);
+            App.RestaurantMenu = ourHotel.RestaurantMenuLink;
             return;
         }
 
@@ -34,10 +35,10 @@ namespace HotelPtyxiaki.Views
             LblHotelEmail.Text = hot.HotelEmail;
             LblHotelAddress.Text = hot.HotelAddress;
             LblWelcome.Text = hot.HotelInfo;
-            ReceptionTelephone = hot.ReceptionTelephone.ToString();
+            ReceptionTelephone = hot.ReceptionTelephone;
         }
 
-        public async void BtnCallReceptionClicked(object sender, EventArgs args)
+        public void BtnCallReceptionClicked(object sender, EventArgs args)
         {
             PlacePhoneCall(ReceptionTelephone);
         }
@@ -46,12 +47,12 @@ namespace HotelPtyxiaki.Views
         {
             try
             {
-                await Launcher.OpenAsync(number);
+                await Launcher.OpenAsync(new Uri("tel:" + number));
                 //PhoneDialer.Open(number);
             }
             catch (ArgumentNullException ex)
             {
-                await DisplayAlert("Cant make call", "Something went wrong!", "OK");
+                await DisplayAlert("Cant make call", "There is no number", "OK");
                 // Number was null or white space
             }
             catch (FeatureNotSupportedException ex)
@@ -61,7 +62,7 @@ namespace HotelPtyxiaki.Views
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Cant make call", "Something went wrong!", "OK");
+                await DisplayAlert("Cant make call", "Wrong number!", "OK");
                 // Other error has occurred.
             }
         }

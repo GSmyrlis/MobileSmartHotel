@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HotelPtyxiaki.Views.PageRestaurant">
     <RelativeLayout Padding="0">
-        <Image x:Name="ImgRestaurantBackground" HorizontalOptions="Fill"  VerticalOptions="FillAndExpand" Aspect="AspectFill" Source="Assets/restaurantback.png" HeightRequest="780" Margin="-10,-15,0,0"></Image>
+        <Image x:Name="ImgRestaurantBackground" HorizontalOptions="Fill"  VerticalOptions="FillAndExpand" Aspect="AspectFill" Source="Assets/restaurantback.png" HeightRequest="870" Margin="-10,-15,0,-15" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}"></Image>
         <StackLayout Padding="0" Margin="0,20,0,0" VerticalOptions="StartAndExpand" HorizontalOptions="Start" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}">
             <Button x:Name="BtnCheckMenu" Margin="0,0,0,0" Text="Menu" VerticalOptions="Start" TextColor="White" FontSize="Body"  Clicked="BtnMenu_Click" />
-            <Label x:Name="LblPool" Text="If you want to hold a table on the restaurant please select for how many people, date and time and press the Submit button" VerticalOptions="StartAndExpand" FontAttributes="Bold" TextColor="NavajoWhite" FontSize="20"></Label>
+            <Label x:Name="LblPool" Text="If you want to reserve a table at our restaurant please select the number of guests, the date and time of your request and press Submit button" VerticalOptions="StartAndExpand" FontAttributes="Italic" TextColor="NavajoWhite" FontSize="16"></Label>
             <StackLayout Orientation="Horizontal">
            
             <Label x:Name="LblPeople" Text="Table for: 1" VerticalOptions="StartAndExpand" FontAttributes="Bold" TextColor="NavajoWhite" FontSize="20"></Label>
@@ -34,7 +34,7 @@
         </StackLayout>
         <StackLayout Padding="0" Margin="0,0,0,0" VerticalOptions="End" HorizontalOptions="Fill" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}">
             <Entry x:Name="EdComment" Margin="0,0,0,0" Placeholder="Enter Comment here" VerticalTextAlignment="Top" VerticalOptions="FillAndExpand" BackgroundColor="LightGray" HeightRequest="130"  MaxLength="40" />
-            <Button x:Name="BtnSubmit" Text="Submit" VerticalOptions="End" ></Button>
+            <Button x:Name="BtnSubmit" Text="Submit" Clicked="BtnSubmitClicked" VerticalOptions="End" ></Button>
         </StackLayout>
     </RelativeLayout>
 </ContentPage>

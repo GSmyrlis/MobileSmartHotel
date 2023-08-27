@@ -5,56 +5,38 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
 using System.Threading.Tasks;
+using Rating;
 
 namespace HotelPtyxiaki
 {
     public partial class App : Application
     {
-        private bool CheckConnection()
+        public static string RestaurantMenu = "https://img.freepik.com/free-vector/creative-restaurant-menu-digital-use-with-photo_52683-45622.jpg?w=2000";
+        public async Task GetHotelData()
         {
-            var current = Connectivity.NetworkAccess;
-            if (current == NetworkAccess.Internet) { return true; }
-            else
-                return false;
-        }
-        public async Task APITest()
-        {
-            Models.Hotel testhotel = new Models.Hotel();
-            testhotel.HotelWebsite = "JerrikoHotel.com";
-            testhotel.HotelName = "Jerriko Hotel";
-            testhotel.HotelInfo = "This is my test for the fucking API, and this is the info of the fucking Jerriko. If you arrived up here it means that Android app can post!!! Bravo";
-            testhotel.ReceptionTelephone = 251235125;
-            testhotel.HotelAddress = "Vasilissis Sofias 68";
-            testhotel.HotelEmail = "info@JerrikoHotel.com.mk";
-            testhotel.CleaningServiceActivate = true;
-            testhotel.RestaurantMenuLink = "JerrikoHotel.SexiestHotel.com.mk";
-            testhotel.CleaningServiceReservDateTime = "2023-08-23 10:35:00, 2023-08-24 12:30:00, 2023-08-25 14:45:00";
-            testhotel.RestaurantReservDateTime = "2023 - 08 - 23 21:00:00";
-            testhotel.RestaurantReservPeopleNumber = 2;
             Services.HotelAPIService _api = new Services.HotelAPIService();
-            await _api.UpdateHotelDataAsync(testhotel);
-            Models.CleaningService cleanex = await _api.GetCleaningServiceDataAsync();
-            Console.WriteLine("CLEANEEEEX!!!: " + cleanex.ToString());
-        }//only for tests when debugging
+            Models.Hotel hoteldata = await _api.GetHotelDataAsync();
+            RestaurantMenu = hoteldata.RestaurantMenuLink;
+        }
+
         public App()
         {
             InitializeComponent();
-            Task.Run(async() => await APITest());
-            if (CheckConnection()) { MainPage = new AppShell(); }
+            Task.Run(async() => await GetHotelData());
+            Connectivity.ConnectivityChanged += OnConnectivityChanged;
+            MainPage = new AppShell(); 
+        }
+
+        private void OnConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            if (e.NetworkAccess != NetworkAccess.Internet)
+            {
+                MainPage = new NetworkErrorPage();
+            }
             else
-            { MainPage = new NetworkErrorPage(); }
-        }
-
-        protected override void OnStart()
-        {
-        }
-
-        protected override void OnSleep()
-        {
-        }
-
-        protected override void OnResume()
-        {
+            {
+                MainPage = new AppShell();
+            }
         }
     }
 }

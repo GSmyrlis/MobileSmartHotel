@@ -7,7 +7,7 @@ namespace HotelPtyxiaki.Services
 {
     public class HotelAPIService
     {
-        private const string BaseUrl = "http://192.168.1.22:5000/api/hotel";
+        private const string BaseUrl = "http://192.168.29.42:5000/api/hotel";
         private readonly HttpClient _httpClient;
 
         public HotelAPIService()
@@ -32,8 +32,8 @@ namespace HotelPtyxiaki.Services
             }
             catch (Exception ex)
             {
-                // Handle exception or log the error
-                throw;
+                Models.Hotel nodata = new Models.Hotel();
+                return nodata;
             }
         }
 
@@ -49,8 +49,7 @@ namespace HotelPtyxiaki.Services
             }
             catch (Exception ex)
             {
-                // Handle exception or log the error
-                throw;
+                return false;
             }
         }
 
@@ -71,8 +70,8 @@ namespace HotelPtyxiaki.Services
             }
             catch (Exception ex)
             {
-                // Handle exception or log the error
-                throw;
+                Models.CleaningService nodata = new Models.CleaningService();
+                return nodata;
             }
         }
 
@@ -93,8 +92,8 @@ namespace HotelPtyxiaki.Services
                 }
                 catch (Exception ex)
                 {
-                    // Handle exception or log the error
-                    throw;
+                Models.RestaurantReservation nodata = new Models.RestaurantReservation();
+                return nodata;
                 }
         }
 
@@ -115,8 +114,8 @@ namespace HotelPtyxiaki.Services
             }
             catch (Exception ex)
             {
-                // Handle exception or log the error
-                throw;
+                Models.Rating norate = new Models.Rating();
+                return norate;
             }
         }
 
@@ -132,8 +131,39 @@ namespace HotelPtyxiaki.Services
             }
             catch (Exception ex)
             {
-                // Handle exception or log the error
-                throw;
+                return false;
+            }
+        }
+
+        public async Task<bool> PostCleaningAsync(Models.CleaningService cleanings)
+        {
+            try
+            {
+                string jsonData = JsonConvert.SerializeObject(cleanings);
+                HttpContent content = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _httpClient.PostAsync(BaseUrl + "/cleaning", content);
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> PostRestaurantReservationAsync(Models.RestaurantReservation restres)
+        {
+            try
+            {
+                string jsonData = JsonConvert.SerializeObject(restres);
+                HttpContent content = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _httpClient.PostAsync(BaseUrl + "/restaurant", content);
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
     }
