@@ -1,25 +1,32 @@
 ﻿using System;
+using Xamarin.Essentials;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 
 namespace HotelPtyxiaki.Services
 {
     public class HotelAPIService
     {
-        private const string BaseUrl = "http://192.168.29.42:5000/api/hotel";
+        private const string BaseUrl = "http://192.168.200.42:5000";
         private readonly HttpClient _httpClient;
-
+        private string BearerToken = string.Empty;
         public HotelAPIService()
         {
             _httpClient = new HttpClient();
+            if (Preferences.ContainsKey("Token"))
+            {
+                BearerToken = Preferences.Get("Token", string.Empty);
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", BearerToken);
+            }
         }
 
         public async Task<Models.Hotel> GetHotelDataAsync()
         {
             try
             {
-                HttpResponseMessage response = await _httpClient.GetAsync(BaseUrl);
+                HttpResponseMessage response = await _httpClient.GetAsync(BaseUrl + "/api/hotel");
                 if (response.IsSuccessStatusCode)
                 {
                     string responseData = await response.Content.ReadAsStringAsync();
@@ -37,27 +44,11 @@ namespace HotelPtyxiaki.Services
             }
         }
 
-        public async Task<bool> UpdateHotelDataAsync(Models.Hotel hotel)
-        {
-            try
-            {
-                string jsonData = JsonConvert.SerializeObject(hotel);
-                HttpContent content = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
-
-                HttpResponseMessage response = await _httpClient.PostAsync(BaseUrl, content);
-                return response.IsSuccessStatusCode;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-        }
-
         public async Task<Models.CleaningService> GetCleaningServiceDataAsync()
         {
             try
             {
-                HttpResponseMessage response = await _httpClient.GetAsync(BaseUrl + "/cleaning");
+                HttpResponseMessage response = await _httpClient.GetAsync(BaseUrl + "/api/hotel/cleaning");
                 if (response.IsSuccessStatusCode)
                 {
                     string responseData = await response.Content.ReadAsStringAsync();
@@ -75,11 +66,45 @@ namespace HotelPtyxiaki.Services
             }
         }
 
+        public async Task<(bool, string)> Login(Models.LoginCredentials credentials)
+        {
+            try
+            {
+                string jsonData = JsonConvert.SerializeObject(credentials);
+                HttpContent content = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _httpClient.PostAsync(BaseUrl + "/login", content);
+                // Read the response content as a string
+                string responseContent = await response.Content.ReadAsStringAsync();
+
+                // Deserialize the response content to a LoginResponse object
+                Models.LoginResponse jsonResponse = JsonConvert.DeserializeObject<Models.LoginResponse>(responseContent);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    // Extract the bearer token from the response
+                    BearerToken = jsonResponse.Token.Substring(7);
+                    Preferences.Set("Token", BearerToken);
+                    return (true, "Connected");
+                }
+                else
+                {
+                    return (false, jsonResponse.Message);
+                }
+            }
+            catch (Exception ex)
+            {
+                return (false, ex.Message);
+            }
+        }
+
+
+
         public async Task<Models.RestaurantReservation> GetRestaurantReservationAsync()
         {
                 try
                 {
-                    HttpResponseMessage response = await _httpClient.GetAsync(BaseUrl + "/restaurant");
+                    HttpResponseMessage response = await _httpClient.GetAsync(BaseUrl + "/api/hotel/restaurant");
                     if (response.IsSuccessStatusCode)
                     {
                         string responseData = await response.Content.ReadAsStringAsync();
@@ -101,7 +126,7 @@ namespace HotelPtyxiaki.Services
         {
             try
             {
-                HttpResponseMessage response = await _httpClient.GetAsync(BaseUrl + "/rating");
+                HttpResponseMessage response = await _httpClient.GetAsync(BaseUrl + "/api/hotel/rating");
                 if (response.IsSuccessStatusCode)
                 {
                     string responseData = await response.Content.ReadAsStringAsync();
@@ -126,7 +151,7 @@ namespace HotelPtyxiaki.Services
                 string jsonData = JsonConvert.SerializeObject(rates);
                 HttpContent content = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = await _httpClient.PostAsync(BaseUrl + "/rating", content);
+                HttpResponseMessage response = await _httpClient.PostAsync(BaseUrl + "/api/hotel/rating", content);
                 return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
@@ -142,7 +167,7 @@ namespace HotelPtyxiaki.Services
                 string jsonData = JsonConvert.SerializeObject(cleanings);
                 HttpContent content = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = await _httpClient.PostAsync(BaseUrl + "/cleaning", content);
+                HttpResponseMessage response = await _httpClient.PostAsync(BaseUrl + "/api/hotel/cleaning", content);
                 return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
@@ -158,7 +183,7 @@ namespace HotelPtyxiaki.Services
                 string jsonData = JsonConvert.SerializeObject(restres);
                 HttpContent content = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = await _httpClient.PostAsync(BaseUrl + "/restaurant", content);
+                HttpResponseMessage response = await _httpClient.PostAsync(BaseUrl + "/api/hotel/restaurant", content);
                 return response.IsSuccessStatusCode;
             }
             catch (Exception ex)

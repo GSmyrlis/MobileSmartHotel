@@ -16,7 +16,6 @@ namespace HotelPtyxiaki.Views
         public HomePage()
         {
             InitializeComponent();
-            
         }
 
         public async void ReceptionImageClicked(object sender, EventArgs args)

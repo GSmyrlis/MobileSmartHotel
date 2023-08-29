@@ -17,3 +17,7 @@ public class ReadAsset : Activity
 Additionally, some Android functions will automatically load asset files:
 
 Typeface tf = Typeface.CreateFromAsset (Context.Assets, "fonts/samplefont.ttf");
+
+Android SKDs path in my computer:
+C:\Program Files\Java\jdk-19 
+C:\Program Files\Android\jdk\jdk-8.0.302.8-hotspot\jdk8u302-b08

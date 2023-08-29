@@ -1,27 +1,33 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"  
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             x:Class="HotelPtyxiaki.Views.LoginPage" 
-             >
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HotelPtyxiaki.Views.LoginPage">
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical" Padding="30" Spacing="40">
-            <BoxView HeightRequest="10"/>
-            <Image HorizontalOptions="Center" WidthRequest="300" Source="Assets/iconfeed.png"/>
-            <Frame BackgroundColor="#BF043055" HasShadow="False">
-                <StackLayout Orientation="Vertical" Spacing="10">
-                    <Entry x:Name="Email" Text="{Binding Email}" Placeholder="Email"   
-                           PlaceholderColor="White" HeightRequest="40"   
-                           Keyboard="Email"  
-                           TextColor="White"/>
-                    <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Senha"   
-                           PlaceholderColor="White" HeightRequest="40"   
-                           IsPassword="True"  
-                           TextColor="White"/>
-                </StackLayout>
-            </Frame>
-            <Button Command="{Binding SubmitCommand}" Text="Login" TextColor="White"  
-                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
-                    BackgroundColor="#088da5" />
-        </StackLayout>
+        <Grid>
+            <StackLayout Padding="20" Spacing="10">
+                <Label Text="Login" FontSize="24" HorizontalOptions="Center" Margin="0,20,0,40" />
+
+                <Frame CornerRadius="10" BackgroundColor="#F9F9F9" Padding="10" Margin="0,0,0,10">
+                    <StackLayout>
+                        <Label Text="Username" FontSize="18" FontAttributes="Bold" TextColor="Black" />
+                        <Entry x:Name="TxtUsername" Placeholder="Enter your username" TextColor="Black" />
+                    </StackLayout>
+                </Frame>
+
+                <Frame CornerRadius="10" BackgroundColor="#F9F9F9" Padding="10" Margin="0,0,0,10">
+                    <StackLayout>
+                        <Label Text="Password" FontSize="18" FontAttributes="Bold" TextColor="Black" />
+                        <Entry x:Name="TxtPassword" Placeholder="Enter your password" IsPassword="True" TextColor="Black" />
+                    </StackLayout>
+                </Frame>
+
+                <Button Text="Login"
+                        Clicked="BtnLoginClicked"
+                        HorizontalOptions="FillAndExpand"
+                        BackgroundColor="#007AFF"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Margin="0,20,0,0" />
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
-</ContentPage>  
+</ContentPage>

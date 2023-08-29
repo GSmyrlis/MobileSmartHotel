@@ -1,7 +1,5 @@
-﻿using HotelPtyxiaki.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -14,20 +12,25 @@ namespace HotelPtyxiaki.Views
     {
         public LoginPage()
         {
-            var vm = new ViewModels.LoginViewModel();
-            this.BindingContext = vm;
-            vm.DisplayInvalidLoginPrompt += () => DisplayAlert("Error", "Invalid Login, try again", "OK");
+
             InitializeComponent();
+        }
 
-            Email.Completed += (object sender, EventArgs e) =>
+        public async void BtnLoginClicked(object sender, EventArgs e)
+        {
+            Models.LoginCredentials credentials = new Models.LoginCredentials();
+            credentials.username = TxtUsername.Text;
+            credentials.password = TxtPassword.Text;
+            Services.HotelAPIService _api = new Services.HotelAPIService();
+            (bool,string) loggedin = await _api.Login(credentials);
+            if (loggedin.Item1)
             {
-                Password.Focus();
-            };
-
-            Password.Completed += (object sender, EventArgs e) =>
+                new AppShell();
+            }
+            else
             {
-                vm.SubmitCommand.Execute(null);
-            };
+                await DisplayAlert("Failure", loggedin.Item2, "OK");
+            }
         }
     }
 }

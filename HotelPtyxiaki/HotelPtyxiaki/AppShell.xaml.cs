@@ -1,5 +1,4 @@
-﻿using HotelPtyxiaki.ViewModels;
-using HotelPtyxiaki.Views;
+﻿using HotelPtyxiaki.Views;
 using System;
 using System.Collections.Generic;
 using Xamarin.Forms;

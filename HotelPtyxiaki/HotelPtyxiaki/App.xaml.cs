@@ -22,9 +22,16 @@ namespace HotelPtyxiaki
         public App()
         {
             InitializeComponent();
-            Task.Run(async() => await GetHotelData());
             Connectivity.ConnectivityChanged += OnConnectivityChanged;
-            MainPage = new AppShell(); 
+            Task.Run(async () => await GetHotelData());
+            if (Preferences.ContainsKey("Token"))
+            {
+                MainPage = new AppShell();
+            }
+            else
+            {
+                MainPage = new LoginPage();
+            }
         }
 
         private void OnConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
