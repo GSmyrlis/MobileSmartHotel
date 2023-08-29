@@ -1,9 +1,8 @@
-﻿using System;
-using Xamarin.Essentials;
+﻿using Newtonsoft.Json;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Runtime.CompilerServices;
-using Newtonsoft.Json;
+using Xamarin.Essentials;
 
 namespace HotelPtyxiaki.Services
 {
@@ -102,24 +101,24 @@ namespace HotelPtyxiaki.Services
 
         public async Task<Models.RestaurantReservation> GetRestaurantReservationAsync()
         {
-                try
+            try
+            {
+                HttpResponseMessage response = await _httpClient.GetAsync(BaseUrl + "/api/hotel/restaurant");
+                if (response.IsSuccessStatusCode)
                 {
-                    HttpResponseMessage response = await _httpClient.GetAsync(BaseUrl + "/api/hotel/restaurant");
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string responseData = await response.Content.ReadAsStringAsync();
-                        return JsonConvert.DeserializeObject<Models.RestaurantReservation>(responseData);
-                    }
-                    else
-                    {
-                        throw new Exception("Failed to get restaurant reservation data: " + response.StatusCode);
-                    }
+                    string responseData = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<Models.RestaurantReservation>(responseData);
                 }
-                catch (Exception ex)
+                else
                 {
+                    throw new Exception("Failed to get restaurant reservation data: " + response.StatusCode);
+                }
+            }
+            catch (Exception ex)
+            {
                 Models.RestaurantReservation nodata = new Models.RestaurantReservation();
                 return nodata;
-                }
+            }
         }
 
         public async Task<Models.Rating> GetRatingAsync()

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HotelPtyxiaki.Models
+﻿namespace HotelPtyxiaki.Models
 {
     public class LoginResponse
     {

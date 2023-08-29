@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System.Collections.ObjectModel;
 
 namespace HotelPtyxiaki.Views
 {
@@ -17,8 +13,11 @@ namespace HotelPtyxiaki.Views
         List<TimeSpan> times = new List<TimeSpan>();
         List<DateTime> datetimes = new List<DateTime>();
         List<DateTime> _givendts = new List<DateTime>();
-        public PageCleaningService() { InitializeComponent(); 
-            this.Appearing += RefreshPage; }
+        public PageCleaningService()
+        {
+            InitializeComponent();
+            this.Appearing += RefreshPage;
+        }
 
         public async void RefreshPage(object sender, EventArgs e)
         {
@@ -83,7 +82,7 @@ namespace HotelPtyxiaki.Views
                 datePicker.IsVisible = false;
             }
         }
-        
+
         public void SpecificDateSelected(object sender, EventArgs args)
         {
             timePicker.Focus();
@@ -143,7 +142,7 @@ namespace HotelPtyxiaki.Views
         {
             ObservableCollection<string> itemList = new ObservableCollection<string>();
             List<SwipeView> swipeViewDateTimes = new List<SwipeView>();
-            foreach(DateTime dt in _datetimes)
+            foreach (DateTime dt in _datetimes)
             {
                 SwipeItem deleteSwipeItem = new SwipeItem
                 {
@@ -200,7 +199,7 @@ namespace HotelPtyxiaki.Views
         {
             dates.Add(datePicker.Date);
             times.Add(timePicker.Time);
-            datetimes =  UniteDatesWithTimes();
+            datetimes = UniteDatesWithTimes();
             SpecificDateTimesShow();
             datePicker.Date = DateTime.Today;
         }
@@ -215,9 +214,9 @@ namespace HotelPtyxiaki.Views
                     SwipeView jacky = (SwipeView)something;
                     jacky.IsVisible = false;
                 }
-                foreach(View view in GridSpecificDateTimes.Children)
+                foreach (View view in GridSpecificDateTimes.Children)
                 {
-                    if(view.GetType() == typeof(SwipeView))
+                    if (view.GetType() == typeof(SwipeView))
                     {
                         if (view.IsVisible == false)
                         {
@@ -235,7 +234,7 @@ namespace HotelPtyxiaki.Views
                                             {
                                                 dates.RemoveAt(datetimes.IndexOf(dt));
                                             }
-                                            catch(Exception dateex)
+                                            catch (Exception dateex)
                                             {
                                                 Console.WriteLine(dateex.Message);
                                             }

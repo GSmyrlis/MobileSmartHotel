@@ -2,14 +2,54 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HotelPtyxiaki.Views.PageReception">
-    <RelativeLayout x:Name="MyLayout" Padding="0" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}">
-        <Image x:Name="ImgReceptionBackground" HorizontalOptions="Fill"  VerticalOptions="FillAndExpand" Aspect="AspectFill" Source="Assets/receptionbackground.png" HeightRequest="870" Margin="-10,-15,0,-15" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}"></Image>
-        <StackLayout Padding="0" Margin="0,40,0,0" VerticalOptions="Center" HorizontalOptions="Start" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}">
-                <Label x:Name="LblHotelName" Margin="20,0,0,0" Text="Hotel Tsamis" TextColor="White" FontAttributes="Bold" FontSize="Title" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
-                <Label x:Name="LblWelcome" Margin="0,0,0,0" Text="Welcome to reception service! From here you can call reception, view hotel's email and hotel's address" TextColor="White" FontSize="Body" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
-                <Label x:Name="LblHotelAddress" Margin="20,0,0,0" Text="Kastoria Entry" TextColor="White" FontAttributes="Bold" FontSize="Title" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
-                <Label x:Name="LblHotelEmail" Margin="20,0,0,0" Text="Ptyxiaki@gmail.com" TextColor="White" FontAttributes="Bold" FontSize="Title" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
-                <Button x:Name="BtnCallReception" Margin="10,430,0,0" Text="📞 Call Reception" Font="24" BorderWidth="1" HorizontalOptions="Center" VerticalOptions="End" Clicked="BtnCallReceptionClicked" />
+
+    <RelativeLayout x:Name="MyLayout" Padding="0">
+        <Image x:Name="ImgClean"  Aspect="AspectFill" Source="Assets/receptionbackground.png" RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,-10,-10,-10"></Image>
+
+
+        <StackLayout Padding="20"
+                     VerticalOptions="Center"
+                     RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}">
+            <Label x:Name="LblHotelName"
+                   Text="Hotel Tsamis"
+                   TextColor="White"
+                   FontAttributes="Bold"
+                   FontSize="28"
+                   HorizontalOptions="CenterAndExpand"
+                   Margin="0,10,0,0" />
+
+            <Label x:Name="LblWelcome"
+                   Text="Welcome to the reception service! Here you can call reception, view the hotel's email and address."
+                   TextColor="White"
+                   FontSize="18"
+                   HorizontalOptions="CenterAndExpand"
+                   HorizontalTextAlignment="Center"
+                   Margin="0,10,0,20" />
+
+            <Label x:Name="LblHotelAddress"
+                   Text="Kastoria Entry"
+                   TextColor="White"
+                   FontAttributes="Bold"
+                   FontSize="20"
+                   HorizontalOptions="CenterAndExpand"
+                   Margin="0,0,0,5" />
+
+            <Label x:Name="LblHotelEmail"
+                   Text="Ptyxiaki@gmail.com"
+                   TextColor="White"
+                   FontAttributes="Bold"
+                   FontSize="20"
+                   HorizontalOptions="CenterAndExpand"
+                   Margin="0,0,0,20" />
+
+            <Button x:Name="BtnCallReception"
+                    Text="📞 Call Reception"
+                    FontSize="20"
+                    BorderWidth="1"
+                    Clicked="BtnCallReceptionClicked"
+                    HorizontalOptions="Center"
+                    VerticalOptions="End"
+                    Margin="0,400,0,20" />
         </StackLayout>
     </RelativeLayout>
 </ContentPage>

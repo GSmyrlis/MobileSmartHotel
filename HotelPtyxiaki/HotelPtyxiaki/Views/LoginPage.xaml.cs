@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,7 +19,7 @@ namespace HotelPtyxiaki.Views
             credentials.username = TxtUsername.Text;
             credentials.password = TxtPassword.Text;
             Services.HotelAPIService _api = new Services.HotelAPIService();
-            (bool,string) loggedin = await _api.Login(credentials);
+            (bool, string) loggedin = await _api.Login(credentials);
             if (loggedin.Item1)
             {
                 new AppShell();

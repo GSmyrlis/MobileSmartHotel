@@ -1,11 +1,7 @@
-﻿using HotelPtyxiaki.Services;
-using HotelPtyxiaki.Views;
-using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using Xamarin.Essentials;
+﻿using HotelPtyxiaki.Views;
 using System.Threading.Tasks;
-using Rating;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace HotelPtyxiaki
 {

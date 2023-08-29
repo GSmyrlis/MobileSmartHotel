@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -46,7 +42,8 @@ namespace HotelPtyxiaki.Views
                     SpecificTimeSelected(null, null);
                 }
             }
-            catch(Exception dtex) {
+            catch (Exception dtex)
+            {
                 Console.WriteLine(dtex.Message);
             }
         }
@@ -61,23 +58,23 @@ namespace HotelPtyxiaki.Views
         }
         void BtnDateClicked(object sender, EventArgs args)
         {
-                datePicker.MinimumDate = DateTime.Today.AddDays(+1);
-                datePicker.Date = DateTime.Today.AddDays(-1);
-                datePicker.IsVisible = true;
-                datePicker.Focus();
-                datePicker.IsVisible = false;
+            datePicker.MinimumDate = DateTime.Today.AddDays(+1);
+            datePicker.Date = DateTime.Today.AddDays(-1);
+            datePicker.IsVisible = true;
+            datePicker.Focus();
+            datePicker.IsVisible = false;
         }
 
         void BtnTimeClicked(object sender, EventArgs args)
         {
-                timePicker.IsVisible = true;
-                timePicker.Focus();
-                timePicker.IsVisible = false;
+            timePicker.IsVisible = true;
+            timePicker.Focus();
+            timePicker.IsVisible = false;
         }
         void SpecificDateSelected(object sender, EventArgs e) { LblDate.Text = "Date: " + datePicker.Date.ToString("dd/MM"); }
-        void SpecificTimeSelected(object sender, EventArgs e) 
+        void SpecificTimeSelected(object sender, EventArgs e)
         {
-                LblTime.Text = "Time: " + timePicker.Time.Hours.ToString("00") + ":" + timePicker.Time.Minutes.ToString("00");
+            LblTime.Text = "Time: " + timePicker.Time.Hours.ToString("00") + ":" + timePicker.Time.Minutes.ToString("00");
         }
         public async void BtnSubmitClicked(object sender, EventArgs e)
         {
