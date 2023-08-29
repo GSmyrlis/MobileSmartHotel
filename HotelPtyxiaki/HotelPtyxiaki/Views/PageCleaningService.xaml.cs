@@ -9,8 +9,6 @@ namespace HotelPtyxiaki.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PageCleaningService : ContentPage
     {
-        List<DateTime> dates = new List<DateTime>();
-        List<TimeSpan> times = new List<TimeSpan>();
         List<DateTime> datetimes = new List<DateTime>();
         List<DateTime> _givendts = new List<DateTime>();
         public PageCleaningService()
@@ -54,23 +52,6 @@ namespace HotelPtyxiaki.Views
             return _cleandata;
         }
 
-        private List<DateTime> UniteDatesWithTimes()
-        {
-            List<DateTime> datetimes = new List<DateTime>();
-            for (int i = 0; i < dates.Count; i++)
-            {
-                try
-                {
-                    datetimes.Add(new DateTime(day: dates[i].Day, month: dates[i].Month, hour: times[i].Hours, minute: times[i].Minutes, year: DateTime.Now.Year, second: 0));
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    continue;
-                }
-            }
-            return datetimes;
-        }
         public void SpecificDateTimeClicked(object sender, EventArgs args)
         {
             if (SwitchEnabled.IsToggled)
@@ -92,14 +73,14 @@ namespace HotelPtyxiaki.Views
         {
             ObservableCollection<string> itemList = new ObservableCollection<string>();
             List<SwipeView> swipeViewDateTimes = new List<SwipeView>();
-            for (int i = 0; i < dates.Count; i++)
+            foreach(DateTime dt in datetimes)
             {
                 SwipeItem deleteSwipeItem = new SwipeItem
                 {
                     Text = "Delete",
                     IconImageSource = "delete.png",
                     BackgroundColor = Color.IndianRed,
-                    BindingContext = datetimes[i]
+                    BindingContext = dt
                 };
                 deleteSwipeItem.Clicked += swipeDeleteItemClicked;
                 List<SwipeItem> swipeItems = new List<SwipeItem>() { deleteSwipeItem };
@@ -112,8 +93,8 @@ namespace HotelPtyxiaki.Views
                 };
                 grid.Children.Add(new Label
                 {
-                    BindingContext = datetimes[i],
-                    Text = "   " + datetimes[i].ToString("dd/MM - HH:mm"),
+                    BindingContext = dt,
+                    Text = "   " + dt.ToString("dd/MM - HH:mm"),
                     TextColor = Color.Black,
                     FontSize = 18,
                     FontAttributes = FontAttributes.Bold,
@@ -188,83 +169,30 @@ namespace HotelPtyxiaki.Views
                 x++;
             }
             datetimes = _datetimes;
-            times = new List<TimeSpan>();
-            foreach (DateTime dt in _datetimes)
-            {
-                times.Add(dt.TimeOfDay);
-            }
         }
 
         public void SpecificTimeSelected(object sender, EventArgs args)
         {
-            dates.Add(datePicker.Date);
-            times.Add(timePicker.Time);
-            datetimes = UniteDatesWithTimes();
+            datetimes.Add(new DateTime(year:datePicker.Date.Year, month:datePicker.Date.Month, day:datePicker.Date.Day, hour:timePicker.Time.Hours, minute:timePicker.Time.Minutes, second: 0));
             SpecificDateTimesShow();
             datePicker.Date = DateTime.Today;
         }
 
+
         public void swipeDeleteItemClicked(object sender, EventArgs args)
         {
-            if (typeof(SwipeItem) == sender.GetType())
+            if (sender is SwipeItem jackson)
             {
-                SwipeItem jackson = (SwipeItem)sender;
+                if (jackson.BindingContext is DateTime dt)
                 {
-                    Element something = (Element)jackson.Parent.Parent;
-                    SwipeView jacky = (SwipeView)something;
-                    jacky.IsVisible = false;
-                }
-                foreach (View view in GridSpecificDateTimes.Children)
-                {
-                    if (view.GetType() == typeof(SwipeView))
+                    int index = datetimes.IndexOf(dt);
+                    if (index >= 0)
                     {
-                        if (view.IsVisible == false)
-                        {
-                            SwipeView swv = (SwipeView)view;
-                            Grid swvgrid = (Grid)swv.Content;
-                            foreach (View swvview in swvgrid.Children)
-                            {
-                                if (swvview.GetType() == typeof(Label))
-                                {
-                                    foreach (DateTime dt in datetimes)
-                                    {
-                                        if (dt == (DateTime)swvview.BindingContext)
-                                        {
-                                            try
-                                            {
-                                                dates.RemoveAt(datetimes.IndexOf(dt));
-                                            }
-                                            catch (Exception dateex)
-                                            {
-                                                Console.WriteLine(dateex.Message);
-                                            }
-                                            try
-                                            {
-                                                times.Remove(dt.TimeOfDay);
-                                            }
-                                            catch (Exception datetimesex)
-                                            {
-                                                Console.WriteLine(datetimesex.Message);
-                                            }
-                                            try
-                                            {
-                                                datetimes.Remove(dt);
-                                            }
-                                            catch (Exception dtex)
-                                            {
-                                                Console.WriteLine(dtex.Message);
-                                            }
-                                            break;
-                                        }
-                                    }
-                                    break;
-                                }
-                            }
-                        }
+                        datetimes.RemoveAt(index);
+                        SpecificDateTimesShow();
                     }
                 }
             }
-            SpecificDateTimesShow();
         }
 
         public void CheckImageClicked(object sender, EventArgs args)
@@ -273,11 +201,9 @@ namespace HotelPtyxiaki.Views
             {
                 if (SwitchEnabled.IsToggled)
                 {
-                    //ImgCheckClean.Source = "/Assets/deactivate.png";
                     ImgClean.Source = "/Assets/openclean.png";
                     return;
                 }
-                //ImgCheckClean.Source = "/Assets/activate.png";
                 ImgClean.Source = "/Assets/closedclean.png";
             }
             catch (Exception ex)

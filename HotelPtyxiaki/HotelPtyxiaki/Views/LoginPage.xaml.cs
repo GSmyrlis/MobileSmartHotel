@@ -9,8 +9,16 @@ namespace HotelPtyxiaki.Views
     {
         public LoginPage()
         {
-
             InitializeComponent();
+            this.Appearing += RefreshPage;
+        }
+
+        public void RefreshPage(object sender, EventArgs e)
+        {
+            if (Xamarin.Essentials.Preferences.ContainsKey("Token"))
+            {
+                Xamarin.Essentials.Preferences.Clear();
+            }
         }
 
         public async void BtnLoginClicked(object sender, EventArgs e)
@@ -22,7 +30,7 @@ namespace HotelPtyxiaki.Views
             (bool, string) loggedin = await _api.Login(credentials);
             if (loggedin.Item1)
             {
-                new AppShell();
+                await Shell.Current.GoToAsync("//HomePage");
             }
             else
             {
