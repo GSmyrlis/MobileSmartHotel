@@ -23,5 +23,17 @@ namespace HotelPtyxiaki.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
+        public override void OnBackPressed()
+        {
+            if (App.Current.MainPage.Navigation.NavigationStack.Count > 1)
+            {
+                App.Current.MainPage.Navigation.PopAsync();
+            }
+            else
+            {
+                base.OnBackPressed();
+            }
+        }
     }
 }

@@ -95,5 +95,10 @@ namespace HotelPtyxiaki.Views
             _restreserve.RestaurantReservDateTime = (new DateTime(hour: timePicker.Time.Hours, minute: timePicker.Time.Minutes, month: datePicker.Date.Month, day: datePicker.Date.Day, year: datePicker.Date.Year, second: 0)).ToString("dd/MM/yyyy hh:mm:ss");
             return _restreserve;
         }
+        protected override bool OnBackButtonPressed()
+        {
+            System.Threading.Tasks.Task.Run(async () => { await Shell.Current.GoToAsync("//HomePage"); }).Wait();
+            return true;
+        }
     }
 }

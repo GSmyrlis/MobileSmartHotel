@@ -8,5 +8,10 @@ namespace HotelPtyxiaki.Views
         {
             InitializeComponent();
         }
+        protected override bool OnBackButtonPressed()
+        {
+            System.Threading.Tasks.Task.Run(async () => { await Shell.Current.GoToAsync("//HomePage"); }).Wait();
+            return true;
+        }
     }
 }

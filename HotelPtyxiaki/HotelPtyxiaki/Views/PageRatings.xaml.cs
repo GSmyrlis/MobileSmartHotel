@@ -53,5 +53,10 @@ namespace HotelPtyxiaki.Views
             _rate.RateOverall = RtbarOverall.SelectedStarValue;
             return _rate;
         }
+        protected override bool OnBackButtonPressed()
+        {
+            System.Threading.Tasks.Task.Run(async () => { await Shell.Current.GoToAsync("//HomePage"); }).Wait();
+            return true;
+        }
     }
 }

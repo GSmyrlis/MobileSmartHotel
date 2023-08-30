@@ -4,51 +4,67 @@
              x:Class="HotelPtyxiaki.Views.HomePage">
     <ScrollView HeightRequest="3000">
         <StackLayout>
-            <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
-                <Image WidthRequest="600" HeightRequest="200" Source="Assets/applogo.png" Aspect="AspectFill"></Image>
-                <Label Text="Reception" FontSize="24" HorizontalOptions="Center" TextColor="#ff6d98a6"></Label>
-                <Image WidthRequest="600" HeightRequest="150" Source="Assets/rate_us.png" Aspect="AspectFill">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="ReceptionImageClicked" NumberOfTapsRequired="1" />
-                    </Image.GestureRecognizers>
-                </Image>
-            </StackLayout>
+            <Image WidthRequest="600" HeightRequest="200" Source="Assets/applogo.png" Aspect="AspectFill"></Image>
 
-            <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
-                <Label Text="Restaurant Reservation" FontSize="24" HorizontalOptions="Center" TextColor="#ff6d98a6"></Label>
-                <Image WidthRequest="600" HeightRequest="150" Source="Assets/restaurantbackground.png" Aspect="AspectFill">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="RestaurantImageClicked" NumberOfTapsRequired="1" />
-                    </Image.GestureRecognizers>
-                </Image>
-            </StackLayout>
+            <!-- Reception Card View -->
+            <Frame Margin="5" Padding="5" CornerRadius="5" BackgroundColor="White">
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                    <Image WidthRequest="100" HeightRequest="100" Source="Assets/receptionbackground.png" Aspect="AspectFill" HorizontalOptions="StartAndExpand">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ReceptionImageClicked" NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Text="Reception" FontSize="20" VerticalOptions="CenterAndExpand" TextColor="#ff6d98a6" HorizontalOptions="StartAndExpand"></Label>
+                </StackLayout>
+            </Frame>
 
-            <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
-                <Label Text="Cleaning Service" FontSize="24" HorizontalOptions="Center" TextColor="#ff6d98a6"></Label>
-                <Image WidthRequest="600" HeightRequest="150" Source="Assets/openclean.png" Aspect="AspectFill">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="CleaningImageClicked" NumberOfTapsRequired="1" />
-                    </Image.GestureRecognizers>
-                </Image>
-            </StackLayout>
+            <!-- Restaurant Reservation Card View -->
+            <Frame Margin="5" Padding="5" CornerRadius="5" BackgroundColor="White">
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                    <Image WidthRequest="100" HeightRequest="100" Source="Assets/restaurantbackground.png" Aspect="AspectFill" HorizontalOptions="StartAndExpand">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="RestaurantImageClicked" NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Text="Restaurant Reservation" FontSize="20" VerticalOptions="CenterAndExpand" TextColor="#ff6d98a6" HorizontalOptions="StartAndExpand"></Label>
+                </StackLayout>
+            </Frame>
 
-            <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
-                <Label Text="About our Hotel" FontSize="24" HorizontalOptions="Center" TextColor="#ff6d98a6"></Label>
-                <Image WidthRequest="600" HeightRequest="150" Source="Assets/aboutnew.png" Aspect="AspectFill">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="AboutImageClicked" NumberOfTapsRequired="1" />
-                    </Image.GestureRecognizers>
-                </Image>
-            </StackLayout>
+            <!-- Cleaning Service Card View -->
+            <Frame Margin="5" Padding="5" CornerRadius="5" BackgroundColor="White">
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                    <Image WidthRequest="100" HeightRequest="100" Source="Assets/openclean.png" Aspect="AspectFill" HorizontalOptions="StartAndExpand">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="CleaningImageClicked" NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Text="Cleaning Service" FontSize="20" VerticalOptions="CenterAndExpand" TextColor="#ff6d98a6" HorizontalOptions="StartAndExpand"></Label>
+                </StackLayout>
+            </Frame>
 
-            <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
-                <Label Text="Rate us" FontSize="24" HorizontalOptions="Center" TextColor="#ff6d98a6"></Label>
-                <Image WidthRequest="600" HeightRequest="150" Source="Assets/about.png" Aspect="AspectFill">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="RateImageClicked" NumberOfTapsRequired="1" />
-                    </Image.GestureRecognizers>
-                </Image>
-            </StackLayout>
+            <!-- About our Hotel Card View -->
+            <Frame Margin="5" Padding="5" CornerRadius="5" BackgroundColor="White">
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                    <Image WidthRequest="100" HeightRequest="100" Source="Assets/aboutnew.png" Aspect="AspectFill" HorizontalOptions="StartAndExpand">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="AboutImageClicked" NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Text="About our Hotel" FontSize="20" VerticalOptions="CenterAndExpand" TextColor="#ff6d98a6" HorizontalOptions="StartAndExpand"></Label>
+                </StackLayout>
+            </Frame>
+
+            <!-- Rate us Card View -->
+            <Frame Margin="5" Padding="5" CornerRadius="5" BackgroundColor="White">
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                    <Image WidthRequest="100" HeightRequest="100" Source="Assets/about.png" Aspect="AspectFill" HorizontalOptions="StartAndExpand">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="RateImageClicked" NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Text="Rate us" FontSize="20" VerticalOptions="CenterAndExpand" TextColor="#ff6d98a6" HorizontalOptions="StartAndExpand"></Label>
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ScrollView>
 </ContentPage>

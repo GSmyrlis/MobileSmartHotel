@@ -61,5 +61,10 @@ namespace HotelPtyxiaki.Views
                 // Other error has occurred.
             }
         }
+        protected override bool OnBackButtonPressed()
+        {
+            System.Threading.Tasks.Task.Run(async () => { await Shell.Current.GoToAsync("//HomePage"); }).Wait();
+            return true;
+        }
     }
 }
