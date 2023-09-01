@@ -1,103 +1,152 @@
 ﻿using System;
-using Xamarin.Essentials;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
 
 namespace HotelPtyxiaki.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PageRestaurant : ContentPage
     {
+        List<Models.RestaurantReservation> requests = new List<Models.RestaurantReservation>();
         public PageRestaurant()
         {
             InitializeComponent();
             this.Appearing += RefreshPage;
         }
+
         public async void RefreshPage(object sender, EventArgs e)
         {
             Services.HotelAPIService _api = new Services.HotelAPIService();
-            Models.RestaurantReservation ourRest = await _api.GetRestaurantReservationAsync();
-            GetValuesToPage(ourRest);
+            List<Models.RestaurantReservation> reqs = await _api.GetRestaurantReservationAsync();
+            GetValuesToPage(reqs);
             return;
-        }
-
-        public void GetValuesToPage(Models.RestaurantReservation restran)
-        {
-            EdComment.Text = restran.RestaurantReservComment;
-            if (restran.RestaurantReservPeopleNumber > 0)
-            {
-                StprPeople.Value = restran.RestaurantReservPeopleNumber;
-            }
-            else
-            {
-                StprPeople.Value = 0;
-            }
-            try
-            {
-                if (HotelPtyxiaki.PublicMethods.ConvertStringToListOfDateTime(restran.RestaurantReservDateTime)[0] != null)
-                {
-                    datePicker.Date = HotelPtyxiaki.PublicMethods.ConvertStringToListOfDateTime(restran.RestaurantReservDateTime)[0];
-                    SpecificDateSelected(null, null);
-                    timePicker.Time = HotelPtyxiaki.PublicMethods.ConvertStringToListOfDateTime(restran.RestaurantReservDateTime)[0].TimeOfDay;
-                    SpecificTimeSelected(null, null);
-                }
-            }
-            catch (Exception dtex)
-            {
-                Console.WriteLine(dtex.Message);
-            }
         }
 
         public async void BtnMenu_Click(object sender, EventArgs e)
         {
             await Browser.OpenAsync(new Uri(App.RestaurantMenu));
         }
-        void OnValueChanged(object sender, ValueChangedEventArgs e)
+
+        public void GetValuesToPage(List<Models.RestaurantReservation> reqs)
         {
-            LblPeople.Text = String.Format("Table for: " + e.NewValue);
+            requests = reqs;
+            ShowLoadedRequests();
         }
-        void BtnDateClicked(object sender, EventArgs args)
+        
+        public void ShowLoadedRequests()
         {
-            datePicker.MinimumDate = DateTime.Today.AddDays(+1);
-            datePicker.Date = DateTime.Today.AddDays(-1);
-            datePicker.IsVisible = true;
-            datePicker.Focus();
-            datePicker.IsVisible = false;
+            ObservableCollection<string> itemList = new ObservableCollection<string>();
+            List<SwipeView> swipeViewDateTimes = new List<SwipeView>();
+            foreach (Models.RestaurantReservation req in requests)
+            {
+                SwipeItem deleteSwipeItem = new SwipeItem
+                {
+                    Text = "Delete",
+                    IconImageSource = "delete.png",
+                    BackgroundColor = Color.IndianRed,
+                    BindingContext = req
+                };
+                deleteSwipeItem.Clicked += swipeDeleteItemClicked;
+                List<SwipeItem> swipeItems = new List<SwipeItem>() { deleteSwipeItem };
+
+                Grid grid = new Grid
+                {
+                    HeightRequest = 60,
+                    WidthRequest = 200,
+                    BackgroundColor = Color.LightGray
+                };
+                grid.Children.Add(new Label
+                {
+                    BindingContext = req,
+                    Text = "   DateTime:" + req.RestaurantReservDateTime + " for " + req.RestaurantReservPeopleNumber + " people, with comment:" + req.RestaurantReservComment,
+                    TextColor = Color.Black,
+                    FontSize = 13,
+                    FontAttributes = FontAttributes.Bold,
+                    HorizontalOptions = LayoutOptions.Start,
+                    VerticalOptions = LayoutOptions.CenterAndExpand,
+                });
+                if (req.RequestState > 0 && req.RequestState < 4)
+                {
+
+                    // Create a stack layout to hold the label and image
+                    StackLayout stackLayout = new StackLayout
+                    {
+                        Orientation = StackOrientation.Horizontal,
+                        HorizontalOptions = LayoutOptions.EndAndExpand,
+                        VerticalOptions = LayoutOptions.CenterAndExpand,
+                    };
+
+                    // Add the label
+                    stackLayout.Children.Add(new Label
+                    {
+                        Text = req.AdminMessage, // Replace with your label text
+                        TextColor = Color.Black,
+                        FontSize = 14,
+                        FontAttributes = FontAttributes.Italic,
+                        VerticalOptions = LayoutOptions.CenterAndExpand
+                    });
+
+                    Models.Enums.RequestState state = (Models.Enums.RequestState)req.RequestState;
+                    Models.Enums myenums = new Models.Enums();
+                    stackLayout.Children.Add(new Image
+                    {
+                        Source = myenums.GetImagePathForRequestState(state),
+                        Aspect = Aspect.AspectFit
+                    });
+
+                    // Add the stack layout to the grid
+                    grid.Children.Add(stackLayout);
+                }
+
+                SwipeView swipeView = new SwipeView
+                {
+                    LeftItems = new SwipeItems(swipeItems),
+                    Content = grid
+                };
+                swipeViewDateTimes.Add(swipeView);
+            }
+            GridRequests.Children.Clear();
+            GridRequests.RowSpacing = 10;
+            ushort x = 0;
+            foreach (SwipeView swipeView in swipeViewDateTimes)
+            {
+                GridRequests.Children.Add(swipeView);
+                Grid.SetRow(swipeView, x);
+                x++;
+            }
         }
 
-        void BtnTimeClicked(object sender, EventArgs args)
+        public async void swipeDeleteItemClicked(object sender, EventArgs args)
         {
-            timePicker.IsVisible = true;
-            timePicker.Focus();
-            timePicker.IsVisible = false;
-        }
-        void SpecificDateSelected(object sender, EventArgs e) { LblDate.Text = "Date: " + datePicker.Date.ToString("dd/MM"); }
-        void SpecificTimeSelected(object sender, EventArgs e)
-        {
-            LblTime.Text = "Time: " + timePicker.Time.Hours.ToString("00") + ":" + timePicker.Time.Minutes.ToString("00");
-        }
-        public async void BtnSubmitClicked(object sender, EventArgs e)
-        {
-            Services.HotelAPIService _api = new Services.HotelAPIService();
-            bool submittedsuccess = await _api.PostRestaurantReservationAsync(GetCurrentRestaurantReservationData());
-            if (!submittedsuccess)
+            if (sender is SwipeItem jackson)
             {
-                await DisplayAlert("Failure", "Failed to post request", "OK");
-                return;
+                if (jackson.BindingContext is Models.RestaurantReservation dt)
+                {
+                    try
+                    {
+                            // Remove from request list
+                            requests.Remove(dt);
+                    }
+                    catch (Exception ex)
+                    {
+                        await DisplayAlert("Problem", ex.Message, "OK");
+                    }
+                    Services.HotelAPIService _api = new Services.HotelAPIService();
+                    bool Deleted = await _api.DeleteRestaurantRequestAsync(new Models.RestaurantReservationDeleteRequest { RestaurantReservComment = dt.RestaurantReservComment, RestaurantReservDateTime = dt.RestaurantReservDateTime, RestaurantReservPeopleNumber = dt.RestaurantReservPeopleNumber });
+                    ShowLoadedRequests();
+                }
             }
-            await DisplayAlert("Posted", "Successfully posted your Reservation", "OK");
         }
-        public Models.RestaurantReservation GetCurrentRestaurantReservationData()
+      
+        public async void BtnAddRequestClicked(object sender, EventArgs args)
         {
-            Models.RestaurantReservation _restreserve = new Models.RestaurantReservation();
-            _restreserve.RestaurantReservPeopleNumber = Convert.ToInt32(StprPeople.Value);
-            _restreserve.RestaurantReservComment = EdComment.Text;
-            _restreserve.RestaurantReservDateTime = (new DateTime(hour: timePicker.Time.Hours, minute: timePicker.Time.Minutes, month: datePicker.Date.Month, day: datePicker.Date.Day, year: datePicker.Date.Year, second: 0)).ToString("dd/MM/yyyy hh:mm:ss");
-            return _restreserve;
+            await Navigation.PushAsync(new PageRestaurantNewRequest());
         }
         protected override bool OnBackButtonPressed()
         {
-            System.Threading.Tasks.Task.Run(async () => { await Shell.Current.GoToAsync("//HomePage"); }).Wait();
+            System.Threading.Tasks.Task.Run(async () =>{ await Shell.Current.GoToAsync("//HomePage"); }).Wait();
             return true;
         }
     }

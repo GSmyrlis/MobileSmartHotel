@@ -99,7 +99,7 @@ namespace HotelPtyxiaki.Services
 
 
 
-        public async Task<Models.RestaurantReservation> GetRestaurantReservationAsync()
+        public async Task<List<Models.RestaurantReservation>> GetRestaurantReservationAsync()
         {
             try
             {
@@ -107,7 +107,7 @@ namespace HotelPtyxiaki.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string responseData = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<Models.RestaurantReservation>(responseData);
+                    return JsonConvert.DeserializeObject<List<Models.RestaurantReservation>>(responseData);
                 }
                 else
                 {
@@ -116,8 +116,7 @@ namespace HotelPtyxiaki.Services
             }
             catch (Exception ex)
             {
-                Models.RestaurantReservation nodata = new Models.RestaurantReservation();
-                return nodata;
+                return new List<Models.RestaurantReservation>();
             }
         }
 
@@ -306,7 +305,42 @@ namespace HotelPtyxiaki.Services
             }
         }
 
+        public async Task<bool> DeleteRestaurantRequestAsync(Models.RestaurantReservationDeleteRequest cleanservdt)
+        {
+            try
+            {
+                // Serialize the cleanservdt object to JSON string
+                string jsonData = JsonConvert.SerializeObject(cleanservdt);
 
+                // Create a new HttpClient instance
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    httpClient.BaseAddress = new Uri(BaseUrl);
+
+                    // Set the authorization header
+                    httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", BearerToken);
+
+                    // Create a StringContent with the JSON data
+                    HttpContent content = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
+
+                    HttpRequestMessage request = new HttpRequestMessage
+                    {
+                        Content = content,
+                        Method = HttpMethod.Delete,
+                        RequestUri = new Uri(BaseUrl + "/api/hotel/restaurant")
+                    };
+
+                    // Send a DELETE request with the JSON content
+                    HttpResponseMessage response = await httpClient.SendAsync(request);
+
+                    return response.IsSuccessStatusCode;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
 
 
     }
