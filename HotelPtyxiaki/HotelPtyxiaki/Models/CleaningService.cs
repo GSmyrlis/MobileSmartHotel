@@ -2,7 +2,8 @@
 {
     public class CleaningService
     {
-        public bool CleaningServiceActivate { get; set; } = true;
         public string CleaningServiceReservDateTime { get; set; } = string.Empty;
+        public int RequestState { get; set; } = 1;
+        public string AdminMessage { get; set; } = string.Empty;
     }
 }

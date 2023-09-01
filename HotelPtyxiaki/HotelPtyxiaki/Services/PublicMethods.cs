@@ -38,5 +38,17 @@ namespace HotelPtyxiaki
             return string.Join(", ", formattedDates);
         }
 
+        public static DateTime ConvertStringToDateTime(string dtString)
+        {
+            if (DateTime.TryParse(dtString.Trim(), out DateTime dt))
+            {
+                return dt;
+            }
+            else
+            {
+                throw new ArgumentException("Failed to parse DateTime from the provided string.", nameof(dtString));
+            }
+        }
+
     }
 }
