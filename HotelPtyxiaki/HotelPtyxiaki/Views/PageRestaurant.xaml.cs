@@ -55,50 +55,86 @@ namespace HotelPtyxiaki.Views
                 {
                     HeightRequest = 60,
                     WidthRequest = 200,
-                    BackgroundColor = Color.LightGray
+                    BackgroundColor = Color.LightGray,
+                    ColumnSpacing = 1
                 };
+                int columnnumber = 0;
+
+                Models.Enums.RequestState state = (Models.Enums.RequestState)req.RequestState;
+                Models.Enums myenums = new Models.Enums();
+                grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+                grid.Children.Add(new Image
+                {
+                    Source = myenums.GetImagePathForRequestState(state),
+                    Aspect = Aspect.AspectFit
+                }, columnnumber++, 0);
+                grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 70 });
                 grid.Children.Add(new Label
                 {
-                    BindingContext = req,
-                    Text = "   DateTime:" + req.RestaurantReservDateTime + " for " + req.RestaurantReservPeopleNumber + " people, with comment:" + req.RestaurantReservComment,
+                    Text = req.AdminMessage,
                     TextColor = Color.Black,
-                    FontSize = 13,
+                    FontSize = 12,
+                    FontAttributes = FontAttributes.Italic,
+                    VerticalOptions = LayoutOptions.CenterAndExpand,
+                    HorizontalOptions = LayoutOptions.Center
+                }, columnnumber++, 0);
+
+                grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+                grid.Children.Add(new Image
+                {
+                    Source = "calendar.png",
+                    Aspect = Aspect.AspectFit
+                }, columnnumber++, 0
+                );
+                grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+                grid.Children.Add(new Label
+                {
+                    Text = (PublicMethods.ConvertStringToDateTime(req.RestaurantReservDateTime)).ToString("dd/MM\nHH:mm"),
+                    TextColor = Color.Black,
+                    FontSize = 14,
                     FontAttributes = FontAttributes.Bold,
                     HorizontalOptions = LayoutOptions.Start,
                     VerticalOptions = LayoutOptions.CenterAndExpand,
-                });
-                if (req.RequestState > 0 && req.RequestState < 4)
+                }, columnnumber++, 0);
+
+                grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+                grid.Children.Add(new Image
                 {
-
-                    // Create a stack layout to hold the label and image
-                    StackLayout stackLayout = new StackLayout
+                    Source = "people.png",
+                    Aspect = Aspect.AspectFit
+                }, columnnumber++, 0
+               );
+                grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+                grid.Children.Add(new Label
+                {
+                    Text = req.RestaurantReservPeopleNumber.ToString(),
+                    TextColor = Color.Black,
+                    FontSize = 20,
+                    FontAttributes = FontAttributes.Bold,
+                    HorizontalOptions = LayoutOptions.Start,
+                    VerticalOptions = LayoutOptions.CenterAndExpand,
+                }, columnnumber++, 0);
+                if (req.RestaurantReservComment != string.Empty && req.RestaurantReservComment != null)
+                {
+                    grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+                    grid.Children.Add(new Image
                     {
-                        Orientation = StackOrientation.Horizontal,
-                        HorizontalOptions = LayoutOptions.EndAndExpand,
-                        VerticalOptions = LayoutOptions.CenterAndExpand,
-                    };
-
-                    // Add the label
-                    stackLayout.Children.Add(new Label
+                        Source = "comment.png",
+                        Aspect = Aspect.AspectFit,
+                    }, columnnumber++, 0
+                  );
+                    grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 45 });
+                    grid.Children.Add(new Label
                     {
-                        Text = req.AdminMessage, // Replace with your label text
+                        Text = req.RestaurantReservComment,
                         TextColor = Color.Black,
-                        FontSize = 14,
-                        FontAttributes = FontAttributes.Italic,
-                        VerticalOptions = LayoutOptions.CenterAndExpand
-                    });
-
-                    Models.Enums.RequestState state = (Models.Enums.RequestState)req.RequestState;
-                    Models.Enums myenums = new Models.Enums();
-                    stackLayout.Children.Add(new Image
-                    {
-                        Source = myenums.GetImagePathForRequestState(state),
-                        Aspect = Aspect.AspectFit
-                    });
-
-                    // Add the stack layout to the grid
-                    grid.Children.Add(stackLayout);
+                        FontSize = 8,
+                        FontAttributes = FontAttributes.Bold,
+                        HorizontalOptions = LayoutOptions.Start,
+                        VerticalOptions = LayoutOptions.CenterAndExpand,
+                    }, columnnumber++, 0);
                 }
+                grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
 
                 SwipeView swipeView = new SwipeView
                 {
@@ -126,13 +162,13 @@ namespace HotelPtyxiaki.Views
                 {
                     try
                     {
-                            // Remove from request list
-                            requests.Remove(dt);
+                        requests.Remove(dt);
                     }
                     catch (Exception ex)
                     {
                         await DisplayAlert("Problem", ex.Message, "OK");
                     }
+
                     Services.HotelAPIService _api = new Services.HotelAPIService();
                     bool Deleted = await _api.DeleteRestaurantRequestAsync(new Models.RestaurantReservationDeleteRequest { RestaurantReservComment = dt.RestaurantReservComment, RestaurantReservDateTime = dt.RestaurantReservDateTime, RestaurantReservPeopleNumber = dt.RestaurantReservPeopleNumber });
                     ShowLoadedRequests();

@@ -100,7 +100,7 @@ namespace HotelPtyxiaki.Views
                     Text = "Delete",
                     IconImageSource = "delete.png",
                     BackgroundColor = Color.IndianRed,
-                    BindingContext = req.CleaningServiceReservDateTime
+                    BindingContext = req
                 };
                 deleteSwipeItem.Clicked += swipeDeleteItemClicked;
                 List<SwipeItem> swipeItems = new List<SwipeItem>() { deleteSwipeItem };
@@ -191,8 +191,17 @@ namespace HotelPtyxiaki.Views
         {
             if (sender is SwipeItem jackson)
             {
-                if (jackson.BindingContext is string dt)
+                if (jackson.BindingContext is Models.CleaningService cs)
                 {
+                    if(cs.RequestState == 2)
+                    {
+                        bool delete = await DisplayAlert("Delete Request", "This Request is Approved. If you delete it, this cleaning request will not happen. Are you sure?", "Yes", "Cancel");
+                        if (!delete)
+                        {
+                            return;
+                        }
+                    }
+                    string dt = cs.CleaningServiceReservDateTime;
                     try
                     {
                         DateTime _dt = PublicMethods.ConvertStringToDateTime(dt);

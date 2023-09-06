@@ -4,7 +4,7 @@
     <ContentPage.Content>
         <Grid>
             <StackLayout Padding="20" Spacing="10">
-                <Label Text="Login" FontSize="24" HorizontalOptions="Center" Margin="0,20,0,40" />
+                <Label Text="Login to the Hotel!" FontSize="24" HorizontalOptions="Center" Margin="0,20,0,40" />
 
                 <Frame CornerRadius="10" BackgroundColor="#F9F9F9" Padding="10" Margin="0,0,0,10">
                     <StackLayout>
@@ -19,6 +19,11 @@
                         <Entry x:Name="TxtPassword" Placeholder="Enter your password" IsPassword="True" TextColor="Black" />
                     </StackLayout>
                 </Frame>
+
+                <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                    <CheckBox x:Name="ChboxShowPassword" Color="Black" CheckedChanged="CkboxShowPassword" />
+                    <Label Text="Show Password" TextColor="Black" VerticalOptions="CenterAndExpand" />
+                </StackLayout>
 
                 <Button Text="Login"
                         Clicked="BtnLoginClicked"

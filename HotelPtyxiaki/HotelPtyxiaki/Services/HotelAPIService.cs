@@ -9,7 +9,7 @@ namespace HotelPtyxiaki.Services
 {
     public class HotelAPIService
     {
-        private const string BaseUrl = "http://192.168.102.42:5000";
+        private const string BaseUrl = "http://192.168.1.12:5000";
         private readonly HttpClient _httpClient;
         private string BearerToken = string.Empty;
         public HotelAPIService()

@@ -23,19 +23,41 @@ namespace HotelPtyxiaki.Views
 
         public async void BtnLoginClicked(object sender, EventArgs e)
         {
-            Models.LoginCredentials credentials = new Models.LoginCredentials();
-            credentials.username = TxtUsername.Text;
-            credentials.password = TxtPassword.Text;
-            Services.HotelAPIService _api = new Services.HotelAPIService();
-            (bool, string) loggedin = await _api.Login(credentials);
-            if (loggedin.Item1)
+            try
             {
-                await Shell.Current.GoToAsync("//HomePage");
+                Models.LoginCredentials credentials = new Models.LoginCredentials
+                {
+                    username = TxtUsername.Text,
+                    password = TxtPassword.Text
+                };
+
+                Services.HotelAPIService _api = new Services.HotelAPIService();
+                (bool, string) loggedin = await _api.Login(credentials);
+
+                if (loggedin.Item1)
+                {
+                    // If login is successful, navigate to HomePage
+                    await Shell.Current.GoToAsync("//HomePage");
+                }
+                else
+                {
+                    // If login fails, show an error message
+                    await DisplayAlert("Failure", loggedin.Item2, "OK");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                await DisplayAlert("Failure", loggedin.Item2, "OK");
+                // Handle and log any exceptions that occur during login
+                await DisplayAlert("Error", "An error occurred during login.", "OK");
+                Console.WriteLine($"Login error: {ex}");
             }
+        }
+
+
+        public void CkboxShowPassword(object sender, EventArgs e)
+        {
+                TxtPassword.IsPassword = !ChboxShowPassword.IsChecked;
+                return;
         }
     }
 }

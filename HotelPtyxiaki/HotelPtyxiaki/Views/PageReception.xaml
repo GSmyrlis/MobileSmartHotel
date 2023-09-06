@@ -49,7 +49,7 @@
                     Clicked="BtnCallReceptionClicked"
                     HorizontalOptions="Center"
                     VerticalOptions="End"
-                    Margin="0,250,0,20" />
+                    Margin="0,200,0,20" />
         </StackLayout>
     </RelativeLayout>
 </ContentPage>

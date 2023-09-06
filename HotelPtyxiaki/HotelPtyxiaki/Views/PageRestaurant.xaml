@@ -7,7 +7,7 @@
         <Image x:Name="ImgRestaurantBackground" HorizontalOptions="Fill"  VerticalOptions="FillAndExpand" Aspect="AspectFill" Source="Assets/restaurantback.png" HeightRequest="870" Margin="-10,-15,0,-15" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}"></Image>
         <StackLayout RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}">
             <Button x:Name="BtnCheckMenu" Margin="0,0,0,0" Text="Menu" VerticalOptions="Start" TextColor="White" FontSize="Body"  Clicked="BtnMenu_Click" />
-            <Label x:Name="LblRequests" Text="Requests for Tables on the Restaurant:" TextColor="Black" FontSize="24"/>
+            <Label x:Name="LblRequests" Text="Requests for Tables on the Restaurant:" TextColor="White" FontSize="24"/>
             <Button Text="Add Request" Clicked="BtnAddRequestClicked" />
             <StackLayout>
                 <ScrollView VerticalScrollBarVisibility="Default">
