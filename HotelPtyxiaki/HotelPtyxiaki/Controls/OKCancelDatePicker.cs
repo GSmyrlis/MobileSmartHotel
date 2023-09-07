@@ -24,16 +24,7 @@ namespace HotelPtyxiaki.Controls
         /// </summary>
         public void OnPickerClosed()
         {
-            if (UserCancelled)
-            {
-                // User cancelled.
-                _ = 0;   // Dummy code, to set a breakpoint on. You can remove this.
-            }
-            else
-            {
-                // User selected OK.
-                _ = 0;   // Dummy code, to set a breakpoint on. You can remove this.
-            }
+                this.UserCancelled = UserCancelled;
         }
     }
 }

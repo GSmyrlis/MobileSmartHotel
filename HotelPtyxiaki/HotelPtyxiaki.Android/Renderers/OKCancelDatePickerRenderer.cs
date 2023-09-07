@@ -2,17 +2,13 @@
 using Android.Content;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-// Replace these with YOUR namespaces.
 using HotelPtyxiaki.Controls;   // Contains OKCancelDatePicker.
-using HotelPtyxiaki.Droid;   
+using HotelPtyxiaki.Droid.Renderers;
 
 [assembly: ExportRenderer(typeof(OKCancelDatePicker), typeof(OKCancelDatePickerRenderer))]
 // Replace this with YOUR Android namespace.
-namespace HotelPtyxiaki.Droid
+namespace HotelPtyxiaki.Droid.Renderers
 {
-    /// <summary>
-    /// Based on Nick Kovalsky's https://stackoverflow.com/a/60786875/199364.
-    /// </summary>
     public class OKCancelDatePickerRenderer : DatePickerRenderer
     {
         public OKCancelDatePickerRenderer(Context context) : base(context)

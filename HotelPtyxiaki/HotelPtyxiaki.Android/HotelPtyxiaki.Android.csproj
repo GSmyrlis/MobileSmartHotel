@@ -69,7 +69,8 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.7.2" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OKCancelDatePickerRenderer.cs" />
+    <Compile Include="Renderers\AndroidCardViewRenderer.cs" />
+    <Compile Include="Renderers\OKCancelDatePickerRenderer.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
