@@ -203,6 +203,29 @@ namespace HotelPtyxiaki.Services
             }
         }
 
+        public async Task<Models.About> GetAboutAsync()
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.GetAsync(BaseUrl + "/api/hotel/about");
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseData = await response.Content.ReadAsStringAsync();
+                    Models.About about = new Models.About();
+                    about = JsonConvert.DeserializeObject<Models.About>(responseData);
+                    return about;
+                }
+                else
+                {
+                    throw new Exception("Failed to get About data: " + response.StatusCode);
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
 
         public async Task<bool> UpdateCleaningServiceActivateAsync(bool cleaningServiceActivate)
         {
