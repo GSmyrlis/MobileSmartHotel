@@ -69,6 +69,10 @@ namespace HotelPtyxiaki.Views
                     Aspect = Aspect.AspectFit
                 }, columnnumber++, 0);
                 grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 70 });
+                if(req.RequestState == 1)
+                {
+                    req.AdminMessage = "Pending";
+                }
                 grid.Children.Add(new Label
                 {
                     Text = req.AdminMessage,
@@ -83,13 +87,14 @@ namespace HotelPtyxiaki.Views
                 grid.Children.Add(new Image
                 {
                     Source = "calendar.png",
-                    Aspect = Aspect.AspectFit
+                    Aspect = Aspect.AspectFit,
+                    HeightRequest = 50
                 }, columnnumber++, 0
                 );
                 grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
                 grid.Children.Add(new Label
                 {
-                    Text = (PublicMethods.ConvertStringToDateTime(req.RestaurantReservDateTime)).ToString("dd/MM\nHH:mm"),
+                    Text = (PublicMethods.ConvertStringToDateTime(req.RestaurantReservDateTime)).ToString("dd/MM\nHH:mm") + "   ",
                     TextColor = Color.Black,
                     FontSize = 14,
                     FontAttributes = FontAttributes.Bold,
@@ -101,13 +106,14 @@ namespace HotelPtyxiaki.Views
                 grid.Children.Add(new Image
                 {
                     Source = "people.png",
-                    Aspect = Aspect.AspectFit
+                    Aspect = Aspect.AspectFit,
+                    HeightRequest = 50
                 }, columnnumber++, 0
                );
                 grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
                 grid.Children.Add(new Label
                 {
-                    Text = req.RestaurantReservPeopleNumber.ToString(),
+                    Text = req.RestaurantReservPeopleNumber.ToString() + "   ",
                     TextColor = Color.Black,
                     FontSize = 20,
                     FontAttributes = FontAttributes.Bold,
@@ -121,6 +127,8 @@ namespace HotelPtyxiaki.Views
                     {
                         Source = "comment.png",
                         Aspect = Aspect.AspectFit,
+                        HeightRequest = 50,
+                        WidthRequest = 50
                     }, columnnumber++, 0
                   );
                     grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 45 });

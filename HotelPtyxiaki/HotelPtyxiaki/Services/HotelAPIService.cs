@@ -9,7 +9,7 @@ namespace HotelPtyxiaki.Services
 {
     public class HotelAPIService
     {
-        private const string BaseUrl = "http://192.168.1.12:5000";
+        private const string BaseUrl = "http://192.168.1.108:5000/";
         private readonly HttpClient _httpClient;
         private string BearerToken = string.Empty;
         public HotelAPIService()
@@ -96,8 +96,6 @@ namespace HotelPtyxiaki.Services
                 return (false, ex.Message);
             }
         }
-
-
 
         public async Task<List<Models.RestaurantReservation>> GetRestaurantReservationAsync()
         {
@@ -225,7 +223,6 @@ namespace HotelPtyxiaki.Services
                 return null;
             }
         }
-
 
         public async Task<bool> UpdateCleaningServiceActivateAsync(bool cleaningServiceActivate)
         {
@@ -364,7 +361,5 @@ namespace HotelPtyxiaki.Services
                 return false;
             }
         }
-
-
     }
 }

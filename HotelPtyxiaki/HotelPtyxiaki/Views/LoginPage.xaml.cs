@@ -1,6 +1,8 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
+using System.Threading.Tasks;
 
 namespace HotelPtyxiaki.Views
 {
@@ -36,14 +38,15 @@ namespace HotelPtyxiaki.Views
 
                 if (loggedin.Item1)
                 {
-                    // If login is successful, navigate to HomePage
-                    await Shell.Current.GoToAsync("//HomePage");
+                    await Task.Delay(100);
+                    MainThread.BeginInvokeOnMainThread(async () =>
+                    {
+                        await Shell.Current.GoToAsync("//HomePage");
+                    });
+                    return;
                 }
-                else
-                {
-                    // If login fails, show an error message
-                    await DisplayAlert("Failure", loggedin.Item2, "OK");
-                }
+                // If login fails, show an error message
+                await DisplayAlert("Failure", loggedin.Item2, "OK");
             }
             catch (Exception ex)
             {

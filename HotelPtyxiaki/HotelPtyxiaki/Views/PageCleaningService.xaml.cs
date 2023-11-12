@@ -111,29 +111,51 @@ namespace HotelPtyxiaki.Views
                     WidthRequest = 200,
                     BackgroundColor = Color.LightGray
                 };
-                grid.Children.Add(new Label
+                // Create a horizontal StackLayout to hold the Image and Label
+                StackLayout stackLayout = new StackLayout
+                {
+                    Orientation = StackOrientation.Horizontal,
+                    HorizontalOptions = LayoutOptions.Start,
+                    VerticalOptions = LayoutOptions.CenterAndExpand,
+                };
+
+                // Add the Image to the StackLayout
+                stackLayout.Children.Add(new Image
+                {
+                    Source = "calendar.png",
+                    Aspect = Aspect.AspectFit,
+                    HeightRequest = 50
+                });
+
+                // Add the Label to the StackLayout
+                stackLayout.Children.Add(new Label
                 {
                     BindingContext = req,
-                    Text = "   " + req.CleaningServiceReservDateTime,
+                    Text = PublicMethods.ConvertStringToDateTime(req.CleaningServiceReservDateTime).ToString("dd/MM HH:mm"),
                     TextColor = Color.Black,
                     FontSize = 18,
                     FontAttributes = FontAttributes.Bold,
                     HorizontalOptions = LayoutOptions.Start,
                     VerticalOptions = LayoutOptions.CenterAndExpand,
                 });
+
+                grid.Children.Add(stackLayout);
+
+                StackLayout additionalStackLayout = new StackLayout
+                {
+                    Orientation = StackOrientation.Horizontal,
+                    HorizontalOptions = LayoutOptions.EndAndExpand,
+                    VerticalOptions = LayoutOptions.CenterAndExpand,
+                };
+
                 if (req.RequestState > 0 && req.RequestState < 4)
                 {
 
-                    // Create a stack layout to hold the label and image
-                    StackLayout stackLayout = new StackLayout
+                    if (req.RequestState == 1)
                     {
-                        Orientation = StackOrientation.Horizontal,
-                        HorizontalOptions = LayoutOptions.EndAndExpand,
-                        VerticalOptions = LayoutOptions.CenterAndExpand,
-                    };
-
-                    // Add the label
-                    stackLayout.Children.Add(new Label
+                        req.AdminMessage = "Pending";
+                    }
+                    additionalStackLayout.Children.Add(new Label
                     {
                         Text = req.AdminMessage, // Replace with your label text
                         TextColor = Color.Black,
@@ -144,16 +166,25 @@ namespace HotelPtyxiaki.Views
 
                     Models.Enums.RequestState state = (Models.Enums.RequestState)req.RequestState;
                     Models.Enums myenums = new Models.Enums();
-                    stackLayout.Children.Add(new Image
+                    additionalStackLayout.Children.Add(new Image
                     {
                         Source = myenums.GetImagePathForRequestState(state),
                         Aspect = Aspect.AspectFit
                     });
-
-                    // Add the stack layout to the grid
-                    grid.Children.Add(stackLayout);
                 }
-
+                if (req.RequestState == 0)
+                {
+                    additionalStackLayout.Children.Add(new Label
+                    {
+                        Text = "Not Uploaded!  ", // Replace with your label text
+                        TextColor = Color.Black,
+                        FontSize = 14,
+                        FontAttributes = FontAttributes.Italic,
+                        VerticalOptions = LayoutOptions.CenterAndExpand
+                    });
+                }
+                // Add the stack layout to the grid
+                grid.Children.Add(additionalStackLayout);
                 SwipeView swipeView = new SwipeView
                 {
                     LeftItems = new SwipeItems(swipeItems),
@@ -178,7 +209,7 @@ namespace HotelPtyxiaki.Views
             datetimes.Add(newJack);
             datetimeRequests.Add(new Models.CleaningService
             {
-                CleaningServiceReservDateTime = newJack.ToString("dd/MM/yy hh:mm:ss"),
+                CleaningServiceReservDateTime = newJack.ToString("dd/MM/yy HH:mm:ss"),
                 AdminMessage = string.Empty,
                 RequestState = 0
             });
