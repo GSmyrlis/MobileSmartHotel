@@ -9,7 +9,7 @@ namespace HotelPtyxiaki.Services
 {
     public class HotelAPIService
     {
-        private const string BaseUrl = "http://192.168.1.12:5000";
+        private const string BaseUrl = "http://192.168.1.108:5000/";
         private readonly HttpClient _httpClient;
         private string BearerToken = string.Empty;
         public HotelAPIService()
@@ -96,8 +96,6 @@ namespace HotelPtyxiaki.Services
                 return (false, ex.Message);
             }
         }
-
-
 
         public async Task<List<Models.RestaurantReservation>> GetRestaurantReservationAsync()
         {
@@ -203,6 +201,28 @@ namespace HotelPtyxiaki.Services
             }
         }
 
+        public async Task<Models.About> GetAboutAsync()
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.GetAsync(BaseUrl + "/api/hotel/about");
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseData = await response.Content.ReadAsStringAsync();
+                    Models.About about = new Models.About();
+                    about = JsonConvert.DeserializeObject<Models.About>(responseData);
+                    return about;
+                }
+                else
+                {
+                    throw new Exception("Failed to get About data: " + response.StatusCode);
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
         public async Task<bool> UpdateCleaningServiceActivateAsync(bool cleaningServiceActivate)
         {
@@ -341,7 +361,5 @@ namespace HotelPtyxiaki.Services
                 return false;
             }
         }
-
-
     }
 }

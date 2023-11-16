@@ -21,7 +21,7 @@
             </StackLayout>
 
             <DatePicker x:Name ="datePicker" Margin="70" IsVisible="false"  Unfocused="SpecificDateSelected"/>
-            <TimePicker x:Name="timePicker" Margin="80" IsVisible="false"   Unfocused="SpecificTimeSelected"/>
+            <Picker x:Name="timePicker" Margin="80" IsVisible="false"   Unfocused="SpecificTimeSelected"/>
             <StackLayout Orientation="Horizontal">
                 <Button Text="Date" Clicked="BtnDateClicked"  />
                 <Label x:Name="LblDate"  Text="Date: 1/1" TextColor="NavajoWhite" FontSize="20" />

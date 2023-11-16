@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,9 +8,17 @@ namespace HotelPtyxiaki.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PageRestaurantNewRequest : ContentPage
     {
+
         public PageRestaurantNewRequest()
         {
             InitializeComponent();
+            List<string> hoursList = new List<string>();
+            for (int hour = 0; hour < 24; hour++)
+            {
+                hoursList.Add(hour.ToString("00") + ":00 - " + (hour + 1).ToString("00") + ":00");
+            }
+
+            timePicker.ItemsSource = hoursList;
         }
 
         void OnValueChanged(object sender, ValueChangedEventArgs e)
@@ -34,7 +43,11 @@ namespace HotelPtyxiaki.Views
         void SpecificDateSelected(object sender, EventArgs e) { LblDate.Text = "Date: " + datePicker.Date.ToString("dd/MM"); }
         void SpecificTimeSelected(object sender, EventArgs e)
         {
-            LblTime.Text = "Time: " + timePicker.Time.Hours.ToString("00") + ":" + timePicker.Time.Minutes.ToString("00");
+            if (timePicker.SelectedIndex == -1)
+            {
+                return;
+            }
+            LblTime.Text = "Time: " + timePicker.SelectedItem.ToString();
         }
         public async void BtnSubmitClicked(object sender, EventArgs e)
         {
@@ -53,7 +66,7 @@ namespace HotelPtyxiaki.Views
             Models.RestaurantReservation _restreserve = new Models.RestaurantReservation();
             _restreserve.RestaurantReservPeopleNumber = Convert.ToInt32(StprPeople.Value);
             _restreserve.RestaurantReservComment = EdComment.Text;
-            _restreserve.RestaurantReservDateTime = (new DateTime(hour: timePicker.Time.Hours, minute: timePicker.Time.Minutes, month: datePicker.Date.Month, day: datePicker.Date.Day, year: datePicker.Date.Year, second: 0)).ToString("dd/MM/yyyy hh:mm:ss");
+            _restreserve.RestaurantReservDateTime = (new DateTime(hour: (Convert.ToInt32(timePicker.SelectedItem.ToString().Substring(0,2))) , minute: 0, month: datePicker.Date.Month, day: datePicker.Date.Day, year: datePicker.Date.Year, second: 0)).ToString("dd/MM/yyyy hh:mm:ss");
             return _restreserve;
         }
         protected override bool OnBackButtonPressed()
